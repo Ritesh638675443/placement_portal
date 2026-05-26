@@ -848,7 +848,15 @@ def show_updates():
 
     # collect updates from DB
     all_updates = get_updates()
+    
+    latest_update_id = all_updates[0]["id"] if all_updates else 0
+    if "last_seen_update" not in st.session_state:
+        st.session_state.last_seen_update = latest_update_id
+    elif latest_update_id > st.session_state.last_seen_update:
+        st.toast("🚨 New placement update available!")
+        st.session_state.last_seen_update = latest_update_id
 
+    
     # ── Admin post area ──────────────────────────────────────────────────────
     if is_admin:
         st.markdown(f"""
