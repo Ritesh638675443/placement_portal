@@ -18,10 +18,10 @@ from supabase_db import (
 from data import DOMAINS, COMPANIES, STATS, PLACEMENT_DIST, DOMAIN_PLACED, CHATBOT_SYSTEM_PROMPT
 
 st.set_page_config(
-    page_title="CEG Placement Portal 2025–26",
+    page_title="Department of Industrial Engineering Placement Portal 2025–26",
     page_icon="🎓",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
 # ── API Key ────────────────────────────────────────────────────────────────────
@@ -466,13 +466,43 @@ def plot_layout(fig):
 
 # ── Pages ──────────────────────────────────────────────────────────────────────
 def show_dashboard():
-    section("🏠 Dashboard")
-
+    st.markdown(
+        "<h2 style='text-align:center; font-weight:800; color:#0B1F5E !important; font-size:40px '>Industrial Engineering, Anna University</h2>",
+        unsafe_allow_html=True
+    )
+    
+    st.markdown(
+        """
+        <p style='
+            text-align:center;
+            font-size:20px;
+            font-style:italic;
+            color:#64748B;
+        '>
+        “Dream is not that which you see while sleeping,<br>
+        it is something that does not let you sleep.”
+        </p>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    st.markdown("</div>", unsafe_allow_html=True)
+    # ================= KPI CARDS =================
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Students Registered", STATS["registered"])
-    c2.metric("Students Placed", STATS["placed"])
-    c3.metric("Placement Rate", f"{STATS['placement_rate']}%")
-    c4.metric("Total Companies", STATS["companies_count"])
+    
+    c1.metric("🎓 Students Registered", STATS["registered"])
+    c2.metric("✅ Students Placed", STATS["placed"])
+    c3.metric("📈 Placement Rate", f"{STATS['placement_rate']}%")
+    c4.metric("🏢 Total Companies", STATS["companies_count"])
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    c5, c6, c7, c8 = st.columns(4)
+    
+    c5.metric("💰 Average Package", f"₹{STATS['avg_package_lpa']} LPA")
+    c6.metric("🚀 Highest Package", f"₹{STATS['max_package_lpa']} LPA")
+    c7.metric("📉 Minimum Package", f"₹{STATS['min_package_lpa']} LPA")
+    c8.metric("🗂️ Domains Covered", STATS["domains_count"])
 
     st.markdown("<br>", unsafe_allow_html=True)
     col_l, col_r = st.columns(2)
