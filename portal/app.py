@@ -949,21 +949,39 @@ def show_updates():
         </div>
         """, unsafe_allow_html=True)
         with st.form("post_update_form", clear_on_submit=True):
-            msg = st.text_area("Message", placeholder="e.g. Infosys drive on June 5 at 10 AM. Register at https://campus.infosys.com", height=100, label_visibility="collapsed")
-            col_btn, _ = st.columns([1, 4])
-            with col_btn:
-                submitted = st.form_submit_button("📤 Post", use_container_width=True)
-            if submitted:
-                if msg.strip():
-                    if post_update(msg.strip()):
-                        st.toast("🚨 New placement update posted!")
-                        st.success("Update posted!")
-                        st.rerun()
-                    else:
-                        st.error("Failed to post. Please try again.")
-                else:
-                    st.warning("Please enter a message before posting.")
 
+        msg = st.text_area(
+            "Message",
+            placeholder="e.g. Infosys drive on June 5 at 10 AM. Register at https://campus.infosys.com",
+            height=100,
+            label_visibility="collapsed"
+        )
+    
+        highlight = st.checkbox("🚨 Add as Running Highlight")
+    
+        col_btn, _ = st.columns([1, 4])
+        with col_btn:
+            submitted = st.form_submit_button(
+                "📤 Post",
+                use_container_width=True
+            )
+        if submitted:
+            if msg.strip():
+                final_msg = msg.strip()
+                if highlight:
+                    final_msg = f"[HIGHLIGHT] {final_msg}"
+                if post_update(final_msg):
+                    st.toast(
+                        "🚨 New placement update posted!"
+                    )
+                    st.success("Update posted!")
+                    st.rerun()
+                else:
+                    st.error("Failed to post. Please try again.")
+            else:
+                st.warning("Please enter a message before posting.")
+
+    
     # ── Search / filter bar ──────────────────────────────────────────────────
     col_search, col_sort = st.columns([3, 1])
     with col_search:
