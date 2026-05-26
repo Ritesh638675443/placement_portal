@@ -505,6 +505,7 @@ def show_dashboard():
     c8.metric("🗂️ Domains Covered", STATS["domains_count"])
 
     st.markdown("<br>", unsafe_allow_html=True)
+    
     col_l, col_r = st.columns(2)
 
     dark = st.session_state.dark_mode
