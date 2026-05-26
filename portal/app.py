@@ -504,7 +504,6 @@ def show_dashboard():
 
     st.markdown("<br>", unsafe_allow_html=True)
     updates = get_updates()
-
     highlights = [
         u["message"].replace("[HIGHLIGHT]", "").strip()
         for u in updates
@@ -519,7 +518,6 @@ def show_dashboard():
         <style>
     
         @keyframes marquee {{
-    
             0% {{
                 transform: translateX(0%);
             }}
@@ -527,6 +525,32 @@ def show_dashboard():
             100% {{
                 transform: translateX(-100%);
             }}
+        }}
+    
+        .marquee-container {{
+            width:100%;
+            overflow:hidden;
+            white-space:nowrap;
+            background:linear-gradient(90deg, #DBEAFE, #EFF6FF);
+            border:1px solid #93C5FD;
+            border-radius:12px;
+            padding:12px 0;
+            margin:10px 0 30px 0;
+            position:relative;
+        }}
+    
+        .live-badge {{
+            position:absolute;
+            left:14px;
+            top:50%;
+            transform:translateY(-50%);
+            background:#2563EB;
+            color:white;
+            font-size:0.72rem;
+            font-weight:700;
+            padding:4px 10px;
+            border-radius:20px;
+            z-index:2;
         }}
     
         .marquee-text {{
@@ -544,31 +568,9 @@ def show_dashboard():
     
         </style>
     
-        <div style="
-            width:100%;
-            overflow:hidden;
-            white-space:nowrap;
-            background:linear-gradient(90deg, #DBEAFE, #EFF6FF);
-            border:1px solid #93C5FD;
-            border-radius:12px;
-            padding:12px 0;
-            margin:10px 0 30px 0;
-            position:relative;
-        ">
+        <div class="marquee-container">
     
-            <div style="
-                position:absolute;
-                left:14px;
-                top:50%;
-                transform:translateY(-50%);
-                background:#2563EB;
-                color:white;
-                font-size:0.72rem;
-                font-weight:700;
-                padding:4px 10px;
-                border-radius:20px;
-                z-index:2;
-            ">
+            <div class="live-badge">
                 🔴 LIVE
             </div>
     
