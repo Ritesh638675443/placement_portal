@@ -397,7 +397,8 @@ def sidebar():
         st.markdown("<div style='height:10px;'></div>", unsafe_allow_html=True)
         _, logo_center, _ = st.columns([1, 3, 1])
         with logo_center:
-            st.image("anna_logo_clean.png", width=110)
+            logo_path = os.path.join(os.path.dirname(__file__), "anna_logo_clean.png")
+            st.image(logo_path)
         st.markdown(f"""
         <div style='font-size:0.7rem; color:{"#64748B" if dark else "#94A3B8"};
              text-align:center; margin:6px 0 14px; padding:0 4px; line-height:1.4;'>
