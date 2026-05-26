@@ -947,17 +947,6 @@ def show_updates():
 
     # ── Side info panel ──────────────────────────────────────────────────────
     # (shown as an expander to keep the page clean)
-    all_links = []
-    for u in all_updates:
-        all_links.extend(extract_links(u["message"]))
-
-    if all_links or is_admin:
-        with st.expander("🔗 All links from updates"):
-            if all_links:
-                for lnk in all_links:
-                    st.markdown(f"- [{lnk}]({lnk})")
-            else:
-                st.markdown(f"<span style='color:{sub_c}; font-size:0.85rem;'>No links in any update yet.</span>", unsafe_allow_html=True)
 
 
 def show_settings():
