@@ -47,7 +47,6 @@ def register_user(reg_no, name, password, email="", domain=""):
         }
 
         supabase.table("users").insert(data).execute()
-        print("INSERT RESPONSE:", response)
         return True, "Account created successfully!"
 
     except Exception as e:
@@ -108,7 +107,6 @@ def post_update(message):
         }
 
         supabase.table("updates").insert(data).execute()
-        print(response)
         return True
 
     except Exception:
