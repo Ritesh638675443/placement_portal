@@ -866,6 +866,7 @@ def show_updates():
             if submitted:
                 if msg.strip():
                     if post_update(msg.strip()):
+                        st.toast("🚨 New placement update posted!")
                         st.success("Update posted!")
                         st.rerun()
                     else:
