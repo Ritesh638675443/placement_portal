@@ -503,7 +503,23 @@ def show_dashboard():
     c8.metric("🗂️ Domains Covered", STATS["domains_count"])
 
     st.markdown("<br>", unsafe_allow_html=True)
+    updates = get_updates()
+    latest_update_id = updates[0]["id"] if updates else 0
 
+    if "dashboard_last_seen" not in st.session_state:
+    
+        st.session_state.dashboard_last_seen = latest_update_id
+    
+    else:
+    
+        if latest_update_id > st.session_state.dashboard_last_seen:
+    
+            st.toast(
+                "🚨 Some new updates came — please check Updates Board!",
+                icon="📢"
+            )
+    
+        st.session_state.dashboard_last_seen = latest_update_id
     col_l, col_r = st.columns(2)
 
     dark = st.session_state.dark_mode
