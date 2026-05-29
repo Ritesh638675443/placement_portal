@@ -527,10 +527,6 @@ def show_dashboard():
         <div class="update-title">
             🔔 NEW PLACEMENT UPDATE AVAILABLE
         </div>
-    
-        <div class="update-subtitle">
-            Admin has posted a new placement announcement.
-        </div>
     </div>
     """, unsafe_allow_html=True)
     
