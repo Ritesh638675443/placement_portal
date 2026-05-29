@@ -466,7 +466,7 @@ def plot_layout(fig):
 # ── Pages ──────────────────────────────────────────────────────────────────────
 def show_dashboard():
     st.markdown(
-        "<h2 style='text-align:center; font-weight:800;background: #EFF6FF; color:#0B1F5E !important; font-size:40px '>Industrial Engineering, Anna University</h2>",
+        "<h2 style='text-align:center; font-weight:800;background:#243B5A; color:white; !important; font-size:40px '>Industrial Engineering, Anna University</h2>",
         unsafe_allow_html=True
     )
     
@@ -508,7 +508,7 @@ def show_dashboard():
         border-radius: 14px;
         text-align: center;
         margin: 20px 0;
-        animation: float 2s ease-in-out infinite;
+        animation: glowPulse 2s infinite;
     }
     
     .update-title {
