@@ -502,13 +502,13 @@ def show_dashboard():
     }
     
     .update-banner {
-        background: linear-gradient(135deg,#2563EB,#1D4ED8);
-        color: white;
-        padding: 20px;
+        background: #EFF6FF;
+        color: #1D4ED8;
+        padding: 18px;
         border-radius: 14px;
         text-align: center;
         margin: 20px 0;
-        animation: glowPulse 2s infinite;
+        animation: bellShake 1.5s infinite;
     }
     
     .update-title {
