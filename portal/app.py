@@ -418,11 +418,11 @@ def sidebar():
 
         pages = [
             ("🏠", "Dashboard", "dashboard"),
+            ("📢", "Updates", "updates"),      # ← moved to 2nd position
             ("🏢", "Companies", "companies"),
             ("🗂️", "Domains", "domains"),
             ("📊", "Insights", "insights"),
             ("🤖", "AI Assistant", "chatbot"),
-            ("📢", "Updates", "updates"),
             ("⚙️", "Settings", "settings"),
         ]
         for icon, label, key in pages:
