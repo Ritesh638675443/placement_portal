@@ -501,24 +501,49 @@ def show_dashboard():
     c7.metric("📉 Minimum Package", f"₹{STATS['min_package_lpa']} LPA")
     c8.metric("🗂️ Domains Covered", STATS["domains_count"])
 
-    st.markdown("<br>", unsafe_allow_html=True)
     updates = get_updates()
     latest_update_id = updates[0]["id"] if updates else 0
-
+    
     if "dashboard_last_seen" not in st.session_state:
-    
         st.session_state.dashboard_last_seen = latest_update_id
     
-    else:
+    elif latest_update_id > st.session_state.dashboard_last_seen:
     
-        if latest_update_id > st.session_state.dashboard_last_seen:
+        st.markdown("""
+        <style>
+        @keyframes pulseAlert {
+            0% {transform: scale(1);}
+            50% {transform: scale(1.02);}
+            100% {transform: scale(1);}
+        }
+        </style>
     
-            st.toast(
-                "🚨 Some new updates came — please check Updates Board!",
-                icon="📢"
-            )
+        <div style="
+            background: linear-gradient(90deg,#EF4444,#F97316);
+            color:white;
+            padding:16px;
+            border-radius:12px;
+            text-align:center;
+            margin-bottom:20px;
+            animation:pulseAlert 1.5s infinite;
+            font-weight:700;
+            box-shadow:0 4px 15px rgba(239,68,68,0.25);
+        ">
+            🚨 NEW PLACEMENT UPDATE AVAILABLE 🚨<br>
+            <span style="font-size:0.9rem;font-weight:500;">
+                Check the Updates Board for the latest announcements.
+            </span>
+        </div>
+        """, unsafe_allow_html=True)
+    
+        st.toast("📢 New placement update available!")
+    
+        if st.button("📢 View Updates", use_container_width=True):
+            st.session_state.page = "updates"
+            st.rerun()
     
         st.session_state.dashboard_last_seen = latest_update_id
+        
     col_l, col_r = st.columns(2)
 
     dark = st.session_state.dark_mode
