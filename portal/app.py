@@ -406,6 +406,14 @@ def sidebar():
         </div>
         <hr style='border:none; border-top:1px solid {"#1E293B" if dark else "#E2E8F0"}; margin:0 0 14px;'>
         """, unsafe_allow_html=True)
+        st.markdown(f"""
+        <div style='border-radius:10px; padding:10px 14px; margin-bottom:18px;
+                    border:1px solid {"#334155" if dark else "#E2E8F0"};
+                    background:{"#1E293B" if dark else "#F1F5F9"};'>
+            <div style='font-weight:700; font-size:0.9rem;'>👤 {user['name']}</div>
+            <div class='sub-text' style='font-size:0.78rem;'>{user['reg_no']}</div>
+        </div>
+        """, unsafe_allow_html=True)
 
         pages = [
             ("🏠", "Dashboard", "dashboard"),
