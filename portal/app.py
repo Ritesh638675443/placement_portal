@@ -415,6 +415,38 @@ def sidebar():
             <div class='sub-text' style='font-size:0.78rem;'>{user['reg_no']}</div>
         </div>
         """, unsafe_allow_html=True)
+        st.markdown(f"""
+        <div style='border-radius:10px; padding:12px 14px; margin-bottom:18px;
+                    border:1px solid {"#334155" if dark else "#E2E8F0"};
+                    background:{"#1E293B" if dark else "#F8FAFC"};'>
+        
+            <div style='font-size:0.75rem; font-weight:600; margin-bottom:8px; color:{subtext};'>
+                👥 Community
+            </div>
+        
+            <div style='display:flex; justify-content:space-between;'>
+        
+                <div style='text-align:center;'>
+                    <div style='font-size:1.15rem; font-weight:700; color:#22C55E;'>
+                        🟢 43
+                    </div>
+                    <div style='font-size:0.72rem; color:{subtext};'>
+                        Online
+                    </div>
+                </div>
+        
+                <div style='text-align:center;'>
+                    <div style='font-size:1.15rem; font-weight:700; color:{accent};'>
+                        {STATS["registered"]}
+                    </div>
+                    <div style='font-size:0.72rem; color:{subtext};'>
+                        Registered
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
         pages = [
             ("🏠", "Dashboard", "dashboard"),
