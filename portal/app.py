@@ -470,32 +470,20 @@ def show_dashboard():
         unsafe_allow_html=True
     )
     
-    st.markdown("""
-    <div style="
-        background:white;
-        border-left:6px solid #2563EB;
-        border-radius:12px;
-        padding:18px 22px;
-        margin:20px 0;
-        box-shadow:0 4px 12px rgba(0,0,0,0.08);
-    ">
-        <div style="
-            font-size:1rem;
-            font-weight:700;
-            color:#0F172A;
-        ">
-            🔔 New Placement Update
-        </div>
-    
-        <div style="
-            font-size:0.85rem;
-            color:#64748B;
-            margin-top:4px;
-        ">
-            Admin has posted a new announcement.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+    """
+    <p style='
+        text-align:center;
+        font-size:20px;
+        font-style:italic;
+        color:#64748B;
+    '>
+    “Dream is not that which you see while sleeping,<br>
+    it is something that does not let you sleep.”
+    </p>
+    """,
+    unsafe_allow_html=True
+)
     # ================= KPI CARDS =================
     c1, c2, c3, c4 = st.columns(4)
     
