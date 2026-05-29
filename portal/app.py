@@ -525,7 +525,7 @@ def show_dashboard():
     
     <div class="update-banner">
         <div class="update-title">
-            🔔 NEW PLACEMENT UPDATE AVAILABLE
+            🔔 NEW INTERSHIP/PLACEMENT UPDATE AVAILABLE
         </div>
     </div>
     """, unsafe_allow_html=True)
