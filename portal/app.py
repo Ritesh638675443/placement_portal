@@ -504,45 +504,18 @@ def show_dashboard():
     updates = get_updates()
     latest_update_id = updates[0]["id"] if updates else 0
     
-    if "dashboard_last_seen" not in st.session_state:
-        st.session_state.dashboard_last_seen = latest_update_id
+    if "last_seen_update" not in st.session_state:
+        st.session_state.last_seen_update = 0
     
-    elif latest_update_id > st.session_state.dashboard_last_seen:
+    if latest_update_id > st.session_state.last_seen_update:
     
-        st.markdown("""
-        <style>
-        @keyframes pulseAlert {
-            0% {transform: scale(1);}
-            50% {transform: scale(1.02);}
-            100% {transform: scale(1);}
-        }
-        </style>
+        st.warning(
+            "🚨 New placement updates are available! Check the Updates section."
+        )
     
-        <div style="
-            background: linear-gradient(90deg,#EF4444,#F97316);
-            color:white;
-            padding:16px;
-            border-radius:12px;
-            text-align:center;
-            margin-bottom:20px;
-            animation:pulseAlert 1.5s infinite;
-            font-weight:700;
-            box-shadow:0 4px 15px rgba(239,68,68,0.25);
-        ">
-            🚨 NEW PLACEMENT UPDATE AVAILABLE 🚨<br>
-            <span style="font-size:0.9rem;font-weight:500;">
-                Check the Updates Board for the latest announcements.
-            </span>
-        </div>
-        """, unsafe_allow_html=True)
-    
-        st.toast("📢 New placement update available!")
-    
-        if st.button("📢 View Updates", use_container_width=True):
+        if st.button("📢 View Updates", key="goto_updates"):
             st.session_state.page = "updates"
             st.rerun()
-    
-        st.session_state.dashboard_last_seen = latest_update_id
         
     col_l, col_r = st.columns(2)
 
