@@ -484,6 +484,63 @@ def show_dashboard():
     """,
     unsafe_allow_html=True
 )
+    st.markdown("""
+    <style>
+    @keyframes glowPulse {
+        0% {
+            transform: scale(1);
+            box-shadow: 0 0 10px rgba(37,99,235,0.3);
+        }
+        50% {
+            transform: scale(1.01);
+            box-shadow: 0 0 25px rgba(37,99,235,0.6);
+        }
+        100% {
+            transform: scale(1);
+            box-shadow: 0 0 10px rgba(37,99,235,0.3);
+        }
+    }
+    
+    .update-banner {
+        background: linear-gradient(135deg,#2563EB,#1D4ED8);
+        color: white;
+        padding: 20px;
+        border-radius: 14px;
+        text-align: center;
+        margin: 20px 0;
+        animation: glowPulse 2s infinite;
+    }
+    
+    .update-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+    
+    .update-subtitle {
+        font-size: 0.9rem;
+        opacity: 0.95;
+    }
+    </style>
+    
+    <div class="update-banner">
+        <div class="update-title">
+            🔔 NEW PLACEMENT UPDATE AVAILABLE
+        </div>
+    
+        <div class="update-subtitle">
+            Admin has posted a new placement announcement.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Center Button
+    c1, c2, c3 = st.columns([3,2,3])
+    
+    with c2:
+        if st.button("📢 View Updates", use_container_width=True):
+            st.session_state.page = "updates"
+            st.rerun()
     # ================= KPI CARDS =================
     c1, c2, c3, c4 = st.columns(4)
     
