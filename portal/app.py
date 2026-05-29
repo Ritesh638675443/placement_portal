@@ -485,40 +485,25 @@ def show_dashboard():
         unsafe_allow_html=True
     )
 
-    updates = get_updates()
-    latest_update_id = updates[0]["id"] if updates else 0
+    st.markdown("""
+    <div style="
+        background:#2563EB;
+        color:white;
+        padding:15px;
+        border-radius:12px;
+        text-align:center;
+        font-weight:bold;
+        margin:20px 0;
+    ">
+    🔔 NEW UPDATE AVAILABLE
     
-    if "last_seen_update" not in st.session_state:
-        st.session_state.last_seen_update = 0
+    Admin has posted a new placement update.
+    </div>
+    """, unsafe_allow_html=True)
     
-    show_popup = latest_update_id > st.session_state.last_seen_update
-    
-    if show_popup:
-    
-        st.markdown("""
-        <style>
-        .update-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0px 8px 30px rgba(0,0,0,0.25);
-            z-index: 9999;
-            text-align: center;
-            min-width: 400px;
-        }
-        </style>
-        """, unsafe_allow_html=True)
-    
-        st.markdown("""
-        <div class="update-popup">
-            <h3>🔔 New Update Available</h3>
-            <p>Admin has posted a new placement update.</p>
-        </div>
-        """, unsafe_allow_html=True)
+    if st.button("📢 View Updates"):
+        st.session_state.page = "updates"
+        st.rerun()
     # ================= KPI CARDS =================
     c1, c2, c3, c4 = st.columns(4)
     
