@@ -215,3 +215,21 @@ def get_community_posts():
     except Exception as e:
         print(e)
         return []
+def delete_community_post(post_id):
+
+    try:
+
+        (
+            supabase.table("community_posts")
+            .delete()
+            .eq("id", post_id)
+            .execute()
+        )
+
+        return True
+
+    except Exception as e:
+
+        print(e)
+
+        return False
