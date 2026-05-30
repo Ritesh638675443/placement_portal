@@ -1046,7 +1046,7 @@ def show_updates():
     # (shown as an expander to keep the page clean)
 def show_community():
 
-    section("🌐 Community")
+    section("🌐 Community Post-Other than CUIC")
 
     user = st.session_state.user
 
