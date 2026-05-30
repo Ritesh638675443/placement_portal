@@ -161,19 +161,27 @@ def upload_community_image(file):
 
         filename = f"{uuid.uuid4()}_{file.name}"
 
-        supabase.storage.from_("community-images").upload(
+        print("FILE:", filename)
+
+        result = supabase.storage.from_("community-images").upload(
             filename,
             file.getvalue()
         )
+
+        print("UPLOAD RESULT:", result)
 
         url = supabase.storage.from_(
             "community-images"
         ).get_public_url(filename)
 
+        print("URL:", url)
+
         return url
 
     except Exception as e:
-        print(e)
+
+        print("UPLOAD ERROR:", e)
+
         return None
 
 
