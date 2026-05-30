@@ -242,3 +242,97 @@ def delete_community_post(post_id):
         print(e)
 
         return False
+
+# ── Likes ─────────────────────────────
+
+def add_like(post_id, user_id):
+
+    try:
+
+        existing = (
+            supabase.table("post_likes")
+            .select("*")
+            .eq("post_id", post_id)
+            .eq("user_id", user_id)
+            .execute()
+        )
+
+        if not existing.data:
+
+            supabase.table(
+                "post_likes"
+            ).insert({
+                "post_id": post_id,
+                "user_id": user_id
+            }).execute()
+
+        return True
+
+    except Exception as e:
+
+        print(e)
+
+        return False
+
+
+def get_like_count(post_id):
+
+    try:
+
+        response = (
+            supabase.table("post_likes")
+            .select("*")
+            .eq("post_id", post_id)
+            .execute()
+        )
+
+        return len(response.data)
+
+    except Exception:
+
+        return 0
+
+# ── Comments ─────────────────────────
+
+def add_comment(
+    post_id,
+    user_name,
+    comment
+):
+
+    try:
+
+        supabase.table(
+            "post_comments"
+        ).insert({
+            "post_id": post_id,
+            "user_name": user_name,
+            "comment": comment
+        }).execute()
+
+        return True
+
+    except Exception as e:
+
+        print(e)
+
+        return False
+
+
+def get_comments(post_id):
+
+    try:
+
+        response = (
+            supabase.table("post_comments")
+            .select("*")
+            .eq("post_id", post_id)
+            .order("created_at")
+            .execute()
+        )
+
+        return response.data
+
+    except Exception:
+
+        return []
