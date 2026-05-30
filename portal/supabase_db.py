@@ -185,7 +185,7 @@ def upload_community_image(file):
         return None
 
 
-def create_community_post(user_id, author_name, content, image_url=None):
+def create_community_post(user_id, author_name, content, linkedin_url=None):
 
     try:
 
@@ -193,7 +193,7 @@ def create_community_post(user_id, author_name, content, image_url=None):
             "user_id": user_id,
             "author_name": author_name,
             "content": content,
-            "image_url": image_url
+            "linkedin_url": linkedin_url
         }
 
         supabase.table(
@@ -223,6 +223,7 @@ def get_community_posts():
     except Exception as e:
         print(e)
         return []
+        
 def delete_community_post(post_id):
 
     try:
