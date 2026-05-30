@@ -16,7 +16,11 @@ from supabase_db import (
     upload_community_image,
     create_community_post,
     get_community_posts,
-    delete_community_post
+    delete_community_post,
+    add_like,
+    get_like_count,
+    add_comment,
+    get_comments
 )
 
 from data import DOMAINS, COMPANIES, STATS, PLACEMENT_DIST, DOMAIN_PLACED, CHATBOT_SYSTEM_PROMPT
@@ -1095,6 +1099,8 @@ def show_community():
             "No community posts yet."
         )
 
+        return
+
     for post in posts:
 
         col1, col2 = st.columns([12, 1])
@@ -1137,12 +1143,92 @@ def show_community():
             post["content"]
         )
 
+        # -------------------------
+        # Likes
+        # -------------------------
+
+        likes = get_like_count(
+            post["id"]
+        )
+
+        col_like1, col_like2 = st.columns(
+            [1, 8]
+        )
+
+        with col_like1:
+
+            if st.button(
+                "❤️",
+                key=f"like_{post['id']}"
+            ):
+
+                add_like(
+                    post["id"],
+                    user.get("id", 0)
+                )
+
+                st.rerun()
+
+        with col_like2:
+
+            st.write(
+                f"{likes} Likes"
+            )
+
+        # -------------------------
+        # LinkedIn Post
+        # -------------------------
+
         if post.get("linkedin_url"):
 
             st.link_button(
                 "🔗 View LinkedIn Post",
                 post["linkedin_url"]
             )
+
+        # -------------------------
+        # Comments
+        # -------------------------
+
+        with st.expander("💬 Comments"):
+
+            comments = get_comments(
+                post["id"]
+            )
+
+            if comments:
+
+                for c in comments:
+
+                    st.markdown(
+                        f"**{c['user_name']}**: {c['comment']}"
+                    )
+
+            else:
+
+                st.caption(
+                    "No comments yet."
+                )
+
+            comment_text = st.text_input(
+                "Add Comment",
+                key=f"comment_{post['id']}"
+            )
+
+            if st.button(
+                "Post Comment",
+                key=f"comment_btn_{post['id']}"
+            ):
+
+                if comment_text.strip():
+
+                    add_comment(
+                        post["id"],
+                        user["name"],
+                        comment_text
+                    )
+
+                    st.rerun()
 
         st.divider()
         
