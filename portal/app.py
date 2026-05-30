@@ -1111,7 +1111,6 @@ def show_community():
                 f"""
                 <div class='portal-card'>
                     <b>👤 {post['author_name']}</b><br>
-                    <small>{post['created_at']}</small>
                 </div>
                 """,
                 unsafe_allow_html=True
