@@ -1053,9 +1053,9 @@ def show_community():
             height=120
         )
 
-        image = st.file_uploader(
-            "Attach Image",
-            type=["png", "jpg", "jpeg"]
+        linkedin_url = st.text_input(
+            "LinkedIn Post URL (Optional)",
+            placeholder="https://www.linkedin.com/posts/..."
         )
 
         submit = st.form_submit_button(
@@ -1066,23 +1066,17 @@ def show_community():
 
             if not content.strip():
 
-                st.warning("Please write something.")
+                st.warning(
+                    "Please write something."
+                )
 
             else:
-
-                image_url = None
-
-                if image:
-
-                    image_url = upload_community_image(
-                        image
-                    )
 
                 create_community_post(
                     user.get("id", 0),
                     user["name"],
                     content,
-                    image_url
+                    linkedin_url
                 )
 
                 st.success(
@@ -1143,11 +1137,11 @@ def show_community():
             post["content"]
         )
 
-        if post["image_url"]:
+        if post.get("linkedin_url"):
 
-            st.image(
-                post["image_url"],
-                use_container_width=True
+            st.link_button(
+                "🔗 View LinkedIn Post",
+                post["linkedin_url"]
             )
 
         st.divider()
