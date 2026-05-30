@@ -1040,7 +1040,6 @@ def show_updates():
 
     # ── Side info panel ──────────────────────────────────────────────────────
     # (shown as an expander to keep the page clean)
-
 def show_community():
 
     section("🌐 Community")
@@ -1066,12 +1065,15 @@ def show_community():
         if submit:
 
             if not content.strip():
+
                 st.warning("Please write something.")
+
             else:
 
                 image_url = None
 
                 if image:
+
                     image_url = upload_community_image(
                         image
                     )
@@ -1083,7 +1085,10 @@ def show_community():
                     image_url
                 )
 
-                st.success("Post published successfully.")
+                st.success(
+                    "Post published successfully."
+                )
+
                 st.rerun()
 
     st.divider()
@@ -1092,52 +1097,60 @@ def show_community():
 
     if not posts:
 
-        st.info("No community posts yet.")
+        st.info(
+            "No community posts yet."
+        )
 
     for post in posts:
 
-        col1, col2 = st.columns([10,1])
-    
+        col1, col2 = st.columns([12, 1])
+
         with col1:
-    
-            st.markdown(f"""
-            <div class='portal-card'>
-                <b>👤 {post['author_name']}</b><br>
-                <small>{post['created_at']}</small>
-            </div>
-            """, unsafe_allow_html=True)
-    
+
+            st.markdown(
+                f"""
+                <div class='portal-card'>
+                    <b>👤 {post['author_name']}</b><br>
+                    <small>{post['created_at']}</small>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
         with col2:
-    
+
             if (
                 user["name"] == post["author_name"]
                 or user.get("is_admin", False)
             ):
-    
+
                 if st.button(
                     "🗑️",
                     key=f"delete_post_{post['id']}"
                 ):
-    
+
                     delete_community_post(
                         post["id"]
                     )
-    
-                    st.success("Post deleted successfully.")
-    
+
+                    st.success(
+                        "Post deleted successfully."
+                    )
+
                     st.rerun()
-    
-        st.write(post["content"])
-    
+
+        st.write(
+            post["content"]
+        )
+
         if post["image_url"]:
-    
+
             st.image(
                 post["image_url"],
                 use_container_width=True
             )
-    
-        st.divider()
 
+        st.divider()
         
 def show_settings():
     section("⚙️ Settings")
