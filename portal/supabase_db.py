@@ -1,7 +1,7 @@
 from supabase import create_client
 import bcrypt
 import re
-
+import uuid
 SUPABASE_URL = "https://cmfttqqtqeddzqjalvxb.supabase.co"
 
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtZnR0cXF0cWVkZHpxamFsdnhiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4MTY5MjEsImV4cCI6MjA5NTM5MjkyMX0.SkdAAJ9thKe-_rk0TFnargcwgS2hA9V89kG2I7msyJU"
@@ -150,3 +150,68 @@ def delete_update(update_id):
 def extract_links(text):
 
     return re.findall(r'https?://[^\s]+', text)
+
+# ─────────────────────────────────────────
+# Community Posts
+# ─────────────────────────────────────────
+
+def upload_community_image(file):
+
+    try:
+
+        filename = f"{uuid.uuid4()}_{file.name}"
+
+        supabase.storage.from_("community-images").upload(
+            filename,
+            file.getvalue()
+        )
+
+        url = supabase.storage.from_(
+            "community-images"
+        ).get_public_url(filename)
+
+        return url
+
+    except Exception as e:
+        print(e)
+        return None
+
+
+def create_community_post(user_id, author_name, content, image_url=None):
+
+    try:
+
+        data = {
+            "user_id": user_id,
+            "author_name": author_name,
+            "content": content,
+            "image_url": image_url
+        }
+
+        supabase.table(
+            "community_posts"
+        ).insert(data).execute()
+
+        return True
+
+    except Exception as e:
+        print(e)
+        return False
+
+
+def get_community_posts():
+
+    try:
+
+        response = (
+            supabase.table("community_posts")
+            .select("*")
+            .order("created_at", desc=True)
+            .execute()
+        )
+
+        return response.data
+
+    except Exception as e:
+        print(e)
+        return []
