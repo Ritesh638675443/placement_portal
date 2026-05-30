@@ -12,7 +12,10 @@ from supabase_db import (
     post_update,
     get_updates,
     delete_update,
-    extract_links
+    extract_links,
+    upload_community_image,
+    create_community_post,
+    get_community_posts
 )
 
 from data import DOMAINS, COMPANIES, STATS, PLACEMENT_DIST, DOMAIN_PLACED, CHATBOT_SYSTEM_PROMPT
@@ -418,6 +421,7 @@ def sidebar():
         pages = [
             ("🏠", "Dashboard", "dashboard"),
             ("📢", "Updates", "updates"),      # ← moved to 2nd position
+            ("🌐", "Community", "community"),
             ("🏢", "Companies", "companies"),
             ("🗂️", "Domains", "domains"),
             ("📊", "Insights", "insights"),
@@ -1035,6 +1039,78 @@ def show_updates():
 
     # ── Side info panel ──────────────────────────────────────────────────────
     # (shown as an expander to keep the page clean)
+def show_community():
+
+    section("🌐 Community")
+
+    user = st.session_state.user
+
+    with st.form("community_post_form", clear_on_submit=True):
+
+        content = st.text_area(
+            "Share something with everyone...",
+            height=120
+        )
+
+        image = st.file_uploader(
+            "Attach Image",
+            type=["png", "jpg", "jpeg"]
+        )
+
+        submit = st.form_submit_button(
+            "🚀 Post"
+        )
+
+        if submit:
+
+            if not content.strip():
+                st.warning("Please write something.")
+            else:
+
+                image_url = None
+
+                if image:
+                    image_url = upload_community_image(
+                        image
+                    )
+
+                create_community_post(
+                    user.get("id", 0),
+                    user["name"],
+                    content,
+                    image_url
+                )
+
+                st.success("Post published successfully.")
+                st.rerun()
+
+    st.divider()
+
+    posts = get_community_posts()
+
+    if not posts:
+
+        st.info("No community posts yet.")
+
+    for post in posts:
+
+        st.markdown(f"""
+        <div class='portal-card'>
+            <b>👤 {post['author_name']}</b><br>
+            <small>{post['created_at']}</small>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.write(post["content"])
+
+        if post["image_url"]:
+            st.image(
+                post["image_url"],
+                use_container_width=True
+            )
+
+        st.divider()
+        
 def show_settings():
     section("⚙️ Settings")
 
@@ -1135,6 +1211,8 @@ def main():
         show_chatbot()
     elif page == "updates":
         show_updates()
+    elif page == "community":
+        show_community()
     elif page == "settings":
         show_settings()
 
