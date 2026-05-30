@@ -1058,8 +1058,8 @@ def show_community():
         )
 
         linkedin_url = st.text_input(
-            "LinkedIn Post URL (Optional)",
-            placeholder="https://www.linkedin.com/posts/..."
+            "Post URL Example, LiknkedIn/Git/Web_URL",
+            placeholder="https://www.abc.com/posts/..."
         )
 
         submit = st.form_submit_button(
@@ -1182,7 +1182,7 @@ def show_community():
         if post.get("linkedin_url"):
 
             st.link_button(
-                "🔗 View LinkedIn Post",
+                "🔗 View Post",
                 post["linkedin_url"]
             )
 
