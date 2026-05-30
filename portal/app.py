@@ -15,7 +15,8 @@ from supabase_db import (
     extract_links,
     upload_community_image,
     create_community_post,
-    get_community_posts
+    get_community_posts,
+    delete_community_post
 )
 
 from data import DOMAINS, COMPANIES, STATS, PLACEMENT_DIST, DOMAIN_PLACED, CHATBOT_SYSTEM_PROMPT
@@ -1095,21 +1096,46 @@ def show_community():
 
     for post in posts:
 
-        st.markdown(f"""
-        <div class='portal-card'>
-            <b>👤 {post['author_name']}</b><br>
-            <small>{post['created_at']}</small>
-        </div>
-        """, unsafe_allow_html=True)
-
+        col1, col2 = st.columns([10,1])
+    
+        with col1:
+    
+            st.markdown(f"""
+            <div class='portal-card'>
+                <b>👤 {post['author_name']}</b><br>
+                <small>{post['created_at']}</small>
+            </div>
+            """, unsafe_allow_html=True)
+    
+        with col2:
+    
+            if (
+                user["name"] == post["author_name"]
+                or user.get("is_admin", False)
+            ):
+    
+                if st.button(
+                    "🗑️",
+                    key=f"delete_post_{post['id']}"
+                ):
+    
+                    delete_community_post(
+                        post["id"]
+                    )
+    
+                    st.success("Post deleted successfully.")
+    
+                    st.rerun()
+    
         st.write(post["content"])
-
+    
         if post["image_url"]:
+    
             st.image(
                 post["image_url"],
                 use_container_width=True
             )
-
+    
         st.divider()
 
         
