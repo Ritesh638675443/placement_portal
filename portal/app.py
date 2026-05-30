@@ -1039,6 +1039,7 @@ def show_updates():
 
     # ── Side info panel ──────────────────────────────────────────────────────
     # (shown as an expander to keep the page clean)
+
 def show_community():
 
     section("🌐 Community")
@@ -1110,6 +1111,7 @@ def show_community():
             )
 
         st.divider()
+
         
 def show_settings():
     section("⚙️ Settings")
