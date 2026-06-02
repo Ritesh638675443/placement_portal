@@ -35,7 +35,7 @@ st.set_page_config(
 # ── API Key ────────────────────────────────────────────────────────────────────
 AIPIPE_KEY = os.environ.get(
     "OPENAI_API_KEY",
-    "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjEwMDE2NzdAZHMuc3R1ZHkuaWl0bS5hYy5pbiIsImlhdCI6MTc3OTc0NTQyMiwiaXNzIjoiaHR0cHM6Ly9haXBpcGUub3JnIiwiYXVkIjoiYWlwaXBlLWFwaSIsImV4cCI6MTc4MDM1MDIyMn0.Qj5gxNX9pJst6cCN10NK4dTuQCQ_uA1klsWThBtZTGw",
+    "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InJpdGVzaHNoYXJtYW5rZTIwMjBAZ21haWwuY29tIiwiaWF0IjoxNzgwNDI0NTIyLCJpc3MiOiJodHRwczovL2FpcGlwZS5vcmciLCJhdWQiOiJhaXBpcGUtYXBpIiwiZXhwIjoxNzgxMDI5MzIyfQ.MdcPLj7S7v2KZkqds2GeIBigWtPTpLhds4W2aiA4HMw",
 )
 AIPIPE_BASE_URL = "https://aipipe.org/openai/v1"
 
@@ -871,20 +871,21 @@ def show_chatbot():
 
 
 def _send_message(text: str):
-
-    st.write("ENV KEY EXISTS:", bool(os.environ.get("eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjEwMDE2NzdAZHMuc3R1ZHkuaWl0bS5hYy5pbiIsImlhdCI6MTc3OTc0NTQyMiwiaXNzIjoiaHR0cHM6Ly9haXBpcGUub3JnIiwiYXVkIjoiYWlwaXBlLWFwaSIsImV4cCI6MTc4MDM1MDIyMn0.Qj5gxNX9pJst6cCN10NK4dTuQCQ_uA1klsWThBtZTGw")))
-    st.write("KEY PREFIX:", AIPIPE_KEY[:25])
-
+    st.session_state.chat_history.append({"role": "user", "content": text})
+    client = get_ai_client()
+    messages = [{"role": "system", "content": CHATBOT_SYSTEM_PROMPT}]
+    messages += [{"role": m["role"], "content": m["content"]}
+                 for m in st.session_state.chat_history]
     try:
-        client = get_ai_client()
-
-        resp = client.models.list()
-
-        st.success("Authentication successful")
-        st.write(resp)
-
+        resp = client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=messages,
+            max_tokens=700,
+        )
+        answer = resp.choices[0].message.content
     except Exception as e:
-        st.error(str(e))
+        answer = f"Sorry, something went wrong: {str(e)}"
+    st.session_state.chat_history.append({"role": "assistant", "content": answer})
 
 
 def show_updates():
