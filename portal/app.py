@@ -871,21 +871,20 @@ def show_chatbot():
 
 
 def _send_message(text: str):
-    st.session_state.chat_history.append({"role": "user", "content": text})
-    client = get_ai_client()
-    messages = [{"role": "system", "content": CHATBOT_SYSTEM_PROMPT}]
-    messages += [{"role": m["role"], "content": m["content"]}
-                 for m in st.session_state.chat_history]
+
+    st.write("ENV KEY EXISTS:", bool(os.environ.get("eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjEwMDE2NzdAZHMuc3R1ZHkuaWl0bS5hYy5pbiIsImlhdCI6MTc3OTc0NTQyMiwiaXNzIjoiaHR0cHM6Ly9haXBpcGUub3JnIiwiYXVkIjoiYWlwaXBlLWFwaSIsImV4cCI6MTc4MDM1MDIyMn0.Qj5gxNX9pJst6cCN10NK4dTuQCQ_uA1klsWThBtZTGw")))
+    st.write("KEY PREFIX:", AIPIPE_KEY[:25])
+
     try:
-        resp = client.chat.completions.create(
-            model="gpt-4.1-mini",
-            messages=messages,
-            max_tokens=700,
-        )
-        answer = resp.choices[0].message.content
+        client = get_ai_client()
+
+        resp = client.models.list()
+
+        st.success("Authentication successful")
+        st.write(resp)
+
     except Exception as e:
-        answer = f"Sorry, something went wrong: {str(e)}"
-    st.session_state.chat_history.append({"role": "assistant", "content": answer})
+        st.error(str(e))
 
 
 def show_updates():
