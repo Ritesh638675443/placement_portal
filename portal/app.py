@@ -35,7 +35,7 @@ st.set_page_config(
 # ── API Key ────────────────────────────────────────────────────────────────────
 AIPIPE_KEY = os.environ.get(
     "OPENAI_API_KEY",
-    "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InJpdGVzaHNoYXJtYW5rZTIwMjBAZ21haWwuY29tIiwiaWF0IjoxNzgwNDI0NTIyLCJpc3MiOiJodHRwczovL2FpcGlwZS5vcmciLCJhdWQiOiJhaXBpcGUtYXBpIiwiZXhwIjoxNzgxMDI5MzIyfQ.MdcPLj7S7v2KZkqds2GeIBigWtPTpLhds4W2aiA4HMw",
+    "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjEwMDE2NzdAZHMuc3R1ZHkuaWl0bS5hYy5pbiIsImlhdCI6MTc4MDY4OTU4MiwiaXNzIjoiaHR0cHM6Ly9haXBpcGUub3JnIiwiYXVkIjoiYWlwaXBlLWFwaSIsImV4cCI6MTc4MTI5NDM4Mn0.t_egA04yyRZViJHTbuhjF7PIQEjYPQwBUCTbPDOmAI4",
 )
 AIPIPE_BASE_URL = "https://aipipe.org/openai/v1"
 
