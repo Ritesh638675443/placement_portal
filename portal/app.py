@@ -1234,11 +1234,41 @@ def show_community():
         st.divider()
 def show_placement_arena():
 
-    st.title("🎯 Placement Arena")
-    st.caption("Practice • Mock Tests • Company Assessments")
+    st.markdown("""
+    # 🎯 Placement Arena
+
+    ### Crack Placement Tests with Confidence
+
+    Practice aptitude, reasoning, verbal ability, company assessments,
+    and mock tests in one place.
+
+    """)
+    
+    col1, col2 = st.columns([3,1])
+
+    with col1:
+
+        st.info("""
+🚀 2747+ Questions Available
+
+📚 49 Placement Topics
+
+🏢 Company Specific Assessments
+
+📊 Performance Analytics
+
+🔥 Daily Challenges
+""")
+
+    with col2:
+
+        st.metric("Questions", "2747")
+        st.metric("Topics", "49")
+
+    st.markdown("### Ready to Start?")
 
     st.link_button(
-        "🚀 Launch Placement Arena",
+        "🚀 Enter Placement Arena",
         "https://aptitudearena-ewoyttpiyj5kqjpgap7dd7.streamlit.app/",
         use_container_width=True,
         type="primary"
@@ -1246,82 +1276,43 @@ def show_placement_arena():
 
     st.divider()
 
-    c1, c2, c3 = st.columns(3)
+    st.subheader("What You'll Find Inside")
+
+    c1, c2, c3, c4 = st.columns(4)
 
     with c1:
-        st.metric("📚 Topics", "49")
+        st.metric("📚", "Practice")
+        st.caption("Topic-wise preparation")
 
     with c2:
-        st.metric("❓ Questions", "2747")
+        st.metric("📝", "Mock Tests")
+        st.caption("Real placement simulations")
 
     with c3:
-        st.metric("🏢 Company Tests", "25+")
+        st.metric("🏢", "Companies")
+        st.caption("Company-specific tests")
+
+    with c4:
+        st.metric("📊", "Analytics")
+        st.caption("Track your growth")
 
     st.divider()
 
-    st.subheader("About")
+    st.subheader("Placement Preparation Roadmap")
 
-    st.write("""
-    Placement Arena is a dedicated aptitude preparation platform
-    designed to help students improve problem-solving speed,
-    accuracy, and confidence for placement assessments.
-    """)
+    roadmap_cols = st.columns(5)
 
-    st.divider()
-
-    st.subheader("Available Modules")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-
-        with st.container(border=True):
-            st.subheader("📚 Practice Mode")
-            st.write("Topic-wise aptitude practice with explanations.")
-
-        with st.container(border=True):
-            st.subheader("📝 Mock Tests")
-            st.write("Simulated placement assessments.")
-
-    with col2:
-
-        with st.container(border=True):
-            st.subheader("🏢 Company Tests")
-            st.write("Company-specific aptitude preparation.")
-
-        with st.container(border=True):
-            st.subheader("📊 Analytics")
-            st.write("Track performance and improvement.")
+    roadmap_cols[0].success("📚 Learn")
+    roadmap_cols[1].success("🎯 Practice")
+    roadmap_cols[2].success("📝 Mock")
+    roadmap_cols[3].success("🏢 Company")
+    roadmap_cols[4].success("💼 Placement")
 
     st.divider()
 
-    st.subheader("Preparation Roadmap")
-
-    roadmap = [
-        "📚 Learn Concepts",
-        "🎯 Practice Questions",
-        "📝 Mock Tests",
-        "🏢 Company Assessments",
-        "💼 Placement Success"
-    ]
-
-    for step in roadmap:
-        st.write(step)
-        if step != roadmap[-1]:
-            st.write("⬇️")
-
-    st.divider()
-
-    st.success(
-        "Regular practice improves speed, accuracy, and placement readiness."
+    st.warning(
+        "The more questions you solve, the easier placement assessments become."
     )
-
-    if st.button("🎉 Show Motivation"):
-        st.balloons()
-        st.success(
-            "Every solved question is one step closer to your placement offer."
-        )
-
 def show_settings():
     section("⚙️ Settings")
 
