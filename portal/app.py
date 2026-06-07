@@ -1234,62 +1234,158 @@ def show_community():
         st.divider()
 def show_placement_arena():
 
-    st.title("🎯 Placement Arena")
+```
+st.markdown("""
+<style>
 
-    st.caption("Practice • Mock Tests • Company Assessments")
+.arena-banner{
+    background: linear-gradient(135deg,#2563EB,#1E40AF);
+    padding:35px;
+    border-radius:20px;
+    color:white;
+    text-align:center;
+    margin-bottom:20px;
+    box-shadow:0px 8px 25px rgba(37,99,235,0.25);
+}
 
-    st.divider()
+.arena-card{
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    border:1px solid #E5E7EB;
+    box-shadow:0px 4px 12px rgba(0,0,0,0.05);
+    transition:all 0.3s ease;
+    margin-bottom:15px;
+}
 
-    col1, col2, col3 = st.columns(3)
+.arena-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0px 10px 25px rgba(37,99,235,0.18);
+    border-color:#2563EB;
+}
 
-    with col1:
-        st.metric("Topics", "49")
+.feature-title{
+    font-size:22px;
+    font-weight:700;
+    color:#1E3A8A;
+}
 
-    with col2:
-        st.metric("Questions", "2747")
+.feature-desc{
+    color:#64748B;
+}
 
-    with col3:
-        st.metric("Company Tests", "25+")
+</style>
+""", unsafe_allow_html=True)
 
-    st.divider()
+st.markdown("""
+<div class="arena-banner">
+    <h1>🎯 Placement Arena</h1>
+    <h3>Practice • Compete • Improve</h3>
+    <p>
+    A dedicated aptitude preparation platform for placement success.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+st.link_button(
+    "🚀 Launch Placement Arena",
+    "https://aptitudearena-ewoyttpiyj5kqjpgap7dd7.streamlit.app/",
+    use_container_width=True,
+    type="primary"
+)
+
+st.divider()
+
+c1, c2, c3 = st.columns(3)
+
+with c1:
+    st.metric("📚 Topics", "49")
+
+with c2:
+    st.metric("❓ Questions", "2747")
+
+with c3:
+    st.metric("🏢 Company Tests", "25+")
+
+st.divider()
+
+st.subheader("Why Placement Arena?")
+
+st.info(
+    "Build speed, accuracy, confidence, and placement readiness through structured aptitude preparation."
+)
+
+col1, col2 = st.columns(2)
+
+with col1:
 
     st.markdown("""
-### Why use Placement Arena?
-
-Placement preparation is not about studying more.
-
-It is about solving more questions, improving speed,
-and becoming comfortable with aptitude tests.
-
-Placement Arena gives you a structured place to practice,
-track progress, and prepare for company assessments.
-""")
-
-    st.divider()
+    <div class="arena-card">
+        <div class="feature-title">📚 Practice Mode</div>
+        <div class="feature-desc">
+            Topic-wise preparation with detailed solutions.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("""
-### Available Modules
+    <div class="arena-card">
+        <div class="feature-title">📝 Mock Tests</div>
+        <div class="feature-desc">
+            Real placement-style assessments with scoring.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
-- 📚 Practice Mode
-- 📝 Mock Tests
-- 🏢 Company Specific Tests
-- 🔥 Daily Challenges
-- 📊 Performance Analytics
+with col2:
+
+    st.markdown("""
+    <div class="arena-card">
+        <div class="feature-title">🏢 Company Tests</div>
+        <div class="feature-desc">
+            Practice tests inspired by major recruiters.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="arena-card">
+        <div class="feature-title">📊 Analytics</div>
+        <div class="feature-desc">
+            Track progress, accuracy, and performance trends.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.divider()
+
+st.markdown("""
+### 🚀 Placement Journey
+
+📚 Learn Concepts
+
+⬇️
+
+🎯 Practice Questions
+
+⬇️
+
+📝 Mock Tests
+
+⬇️
+
+🏢 Company Assessments
+
+⬇️
+
+💼 Placement Success
 """)
 
-    st.divider()
+st.success(
+    "Consistent practice is the fastest way to improve aptitude performance."
+)
+```
 
-    st.info(
-        "Solve questions regularly, track your progress, and improve your placement readiness."
-    )
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    st.link_button(
-        "🚀 Open Placement Arena",
-        "https://YOUR-ARENA-LINK.streamlit.app",
-        use_container_width=True
-    )
 
 def show_settings():
     section("⚙️ Settings")
