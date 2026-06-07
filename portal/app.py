@@ -1234,85 +1234,161 @@ def show_community():
         st.divider()
 def show_placement_arena():
 
-    st.markdown("""
-    # 🎯 Placement Arena
+    st.title("🎯 Aptitude Arena")
+    st.caption("Quantitative Aptitude Practice Platform")
 
-    ### Crack Placement Tests with Confidence
+    st.container(border=True)
 
-    Practice aptitude, reasoning, verbal ability, company assessments,
-    and mock tests in one place.
+    st.success("""
+🚀 Welcome to Aptitude Arena
 
-    """)
-    
-    col1, col2 = st.columns([3,1])
+Practice from a collection of:
 
-    with col1:
+📚 49 Aptitude Topics
 
-        st.info("""
-🚀 2747+ Questions Available
+❓ 2747 Practice Questions
 
-📚 49 Placement Topics
+📝 Unlimited Practice Tests
 
-🏢 Company Specific Assessments
+🎯 Topic-wise Learning
 
-📊 Performance Analytics
+📊 Performance Tracking
 
-🔥 Daily Challenges
+👇 Click the button below to start practicing.
 """)
 
-    with col2:
-
-        st.metric("Questions", "2747")
-        st.metric("Topics", "49")
-
-    st.markdown("### Ready to Start?")
-
     st.link_button(
-        "🚀 Enter Placement Arena",
+        "🚀 START PRACTICING NOW",
         "https://aptitudearena-ewoyttpiyj5kqjpgap7dd7.streamlit.app/",
         use_container_width=True,
         type="primary"
     )
 
+    st.warning(
+        "👆 Click the button above to open Aptitude Arena and begin solving questions."
+    )
+
     st.divider()
 
-    st.subheader("What You'll Find Inside")
+    col1, col2, col3 = st.columns(3)
 
-    c1, c2, c3, c4 = st.columns(4)
+    with col1:
+        st.metric(
+            "📚 Topics",
+            "49",
+            help="Topic-wise aptitude preparation"
+        )
+
+    with col2:
+        st.metric(
+            "❓ Questions",
+            "2747",
+            help="Real aptitude questions"
+        )
+
+    with col3:
+        st.metric(
+            "🎯 Practice",
+            "Unlimited",
+            help="Practice as much as you want"
+        )
+
+    st.divider()
+
+    st.subheader("📘 Topics Covered")
+
+    c1, c2, c3 = st.columns(3)
 
     with c1:
-        st.metric("📚", "Practice")
-        st.caption("Topic-wise preparation")
+        with st.container(border=True):
+            st.markdown("""
+### 🔢 Number System
+
+• HCF & LCM
+
+• Divisibility
+
+• Simplification
+
+• Surds & Indices
+
+• Logarithms
+""")
 
     with c2:
-        st.metric("📝", "Mock Tests")
-        st.caption("Real placement simulations")
+        with st.container(border=True):
+            st.markdown("""
+### 📈 Arithmetic
+
+• Percentage
+
+• Profit & Loss
+
+• Ratio & Proportion
+
+• Average
+
+• Interest
+""")
 
     with c3:
-        st.metric("🏢", "Companies")
-        st.caption("Company-specific tests")
+        with st.container(border=True):
+            st.markdown("""
+### ⚡ Advanced
 
-    with c4:
-        st.metric("📊", "Analytics")
-        st.caption("Track your growth")
+• Time & Work
 
-    st.divider()
+• Time Speed Distance
 
-    st.subheader("Placement Preparation Roadmap")
+• Probability
 
-    roadmap_cols = st.columns(5)
+• Permutation
 
-    roadmap_cols[0].success("📚 Learn")
-    roadmap_cols[1].success("🎯 Practice")
-    roadmap_cols[2].success("📝 Mock")
-    roadmap_cols[3].success("🏢 Company")
-    roadmap_cols[4].success("💼 Placement")
+• Data Interpretation
+""")
 
     st.divider()
 
-    st.warning(
-        "The more questions you solve, the easier placement assessments become."
-    )
+    st.subheader("🛣️ Learning Path")
+
+    step1, step2, step3, step4 = st.columns(4)
+
+    with step1:
+        st.success("📖 Learn")
+
+    with step2:
+        st.success("✍️ Practice")
+
+    with step3:
+        st.success("📝 Test")
+
+    with step4:
+        st.success("🏆 Improve")
+
+    st.divider()
+
+    st.info("""
+💡 Consistent practice is the fastest way to improve aptitude performance.
+
+The more questions you solve, the easier placement assessments become.
+""")
+
+    col1, col2, col3 = st.columns([1, 2, 1])
+
+    with col2:
+
+        st.link_button(
+            "🎯 ENTER APTITUDE ARENA",
+            "https://aptitudearena-ewoyttpiyj5kqjpgap7dd7.streamlit.app/",
+            use_container_width=True,
+            type="primary"
+        )
+
+    if st.button("🎉 I'm Ready To Start"):
+        st.balloons()
+        st.success(
+            "Awesome! Click 'ENTER APTITUDE ARENA' and start solving questions."
+        )
 def show_settings():
     section("⚙️ Settings")
 
