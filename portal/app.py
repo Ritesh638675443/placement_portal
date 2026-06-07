@@ -427,6 +427,7 @@ def sidebar():
             ("🏠", "Dashboard", "dashboard"),
             ("📢", "Updates", "updates"),      # ← moved to 2nd position
             ("🌐", "Community", "community"),
+            ("🎯", "Placement Arena", "arena"),
             ("🏢", "Companies", "companies"),
             ("🗂️", "Domains", "domains"),
             ("📊", "Insights", "insights"),
@@ -1231,7 +1232,65 @@ def show_community():
                     st.rerun()
 
         st.divider()
-        
+def show_placement_arena():
+
+    st.title("🎯 Placement Arena")
+
+    st.caption("Practice • Mock Tests • Company Assessments")
+
+    st.divider()
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric("Topics", "49")
+
+    with col2:
+        st.metric("Questions", "2747")
+
+    with col3:
+        st.metric("Company Tests", "25+")
+
+    st.divider()
+
+    st.markdown("""
+### Why use Placement Arena?
+
+Placement preparation is not about studying more.
+
+It is about solving more questions, improving speed,
+and becoming comfortable with aptitude tests.
+
+Placement Arena gives you a structured place to practice,
+track progress, and prepare for company assessments.
+""")
+
+    st.divider()
+
+    st.markdown("""
+### Available Modules
+
+- 📚 Practice Mode
+- 📝 Mock Tests
+- 🏢 Company Specific Tests
+- 🔥 Daily Challenges
+- 📊 Performance Analytics
+""")
+
+    st.divider()
+
+    st.info(
+        "Solve questions regularly, track your progress, and improve your placement readiness."
+    )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    st.link_button(
+        "🚀 Open Placement Arena",
+        "https://YOUR-ARENA-LINK.streamlit.app",
+        use_container_width=True
+    )
+
 def show_settings():
     section("⚙️ Settings")
 
@@ -1336,6 +1395,8 @@ def main():
         show_community()
     elif page == "settings":
         show_settings()
+    elif page == "arena":
+        show_placement_arena()
 
 
 if __name__ == "__main__":
