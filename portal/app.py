@@ -1241,19 +1241,6 @@ def show_placement_arena():
 
     st.success("""
 🚀 Welcome to Aptitude Arena
-
-Practice from a collection of:
-
-📚 49 Aptitude Topics
-
-❓ 2747 Practice Questions
-
-📝 Unlimited Practice Tests
-
-🎯 Topic-wise Learning
-
-📊 Performance Tracking
-
 👇 Click the button below to start practicing.
 """)
 
@@ -1292,61 +1279,6 @@ Practice from a collection of:
             "Unlimited",
             help="Practice as much as you want"
         )
-
-    st.divider()
-
-    st.subheader("📘 Topics Covered")
-
-    c1, c2, c3 = st.columns(3)
-
-    with c1:
-        with st.container(border=True):
-            st.markdown("""
-### 🔢 Number System
-
-• HCF & LCM
-
-• Divisibility
-
-• Simplification
-
-• Surds & Indices
-
-• Logarithms
-""")
-
-    with c2:
-        with st.container(border=True):
-            st.markdown("""
-### 📈 Arithmetic
-
-• Percentage
-
-• Profit & Loss
-
-• Ratio & Proportion
-
-• Average
-
-• Interest
-""")
-
-    with c3:
-        with st.container(border=True):
-            st.markdown("""
-### ⚡ Advanced
-
-• Time & Work
-
-• Time Speed Distance
-
-• Probability
-
-• Permutation
-
-• Data Interpretation
-""")
-
     st.divider()
 
     st.subheader("🛣️ Learning Path")
