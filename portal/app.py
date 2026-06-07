@@ -1234,11 +1234,8 @@ def show_community():
         st.divider()
 def show_placement_arena():
 
-    st.title("🎯 Aptitude Arena")
+    st.title("Aptitude Arena")
     st.caption("Quantitative Aptitude Practice Platform")
-
-    st.container(border=True)
-
     st.success("""
 🚀 Welcome to Aptitude Arena
 👇 Click the button below to start practicing.
