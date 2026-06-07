@@ -1249,7 +1249,7 @@ def show_placement_arena():
     )
 
     st.warning(
-        "👆 Click the button above to open Aptitude Arena and begin solving questions."
+        "👆 Click the button above "START PRACTICING NOW" to open Aptitude Arena and begin solving questions."
     )
 
     st.divider()
