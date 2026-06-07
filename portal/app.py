@@ -1234,158 +1234,93 @@ def show_community():
         st.divider()
 def show_placement_arena():
 
-```
-st.markdown("""
-<style>
+    st.title("🎯 Placement Arena")
+    st.caption("Practice • Mock Tests • Company Assessments")
 
-.arena-banner{
-    background: linear-gradient(135deg,#2563EB,#1E40AF);
-    padding:35px;
-    border-radius:20px;
-    color:white;
-    text-align:center;
-    margin-bottom:20px;
-    box-shadow:0px 8px 25px rgba(37,99,235,0.25);
-}
+    st.link_button(
+        "🚀 Launch Placement Arena",
+        "https://aptitudearena-ewoyttpiyj5kqjpgap7dd7.streamlit.app/",
+        use_container_width=True,
+        type="primary"
+    )
 
-.arena-card{
-    background:white;
-    padding:20px;
-    border-radius:18px;
-    border:1px solid #E5E7EB;
-    box-shadow:0px 4px 12px rgba(0,0,0,0.05);
-    transition:all 0.3s ease;
-    margin-bottom:15px;
-}
+    st.divider()
 
-.arena-card:hover{
-    transform:translateY(-6px);
-    box-shadow:0px 10px 25px rgba(37,99,235,0.18);
-    border-color:#2563EB;
-}
+    c1, c2, c3 = st.columns(3)
 
-.feature-title{
-    font-size:22px;
-    font-weight:700;
-    color:#1E3A8A;
-}
+    with c1:
+        st.metric("📚 Topics", "49")
 
-.feature-desc{
-    color:#64748B;
-}
+    with c2:
+        st.metric("❓ Questions", "2747")
 
-</style>
-""", unsafe_allow_html=True)
+    with c3:
+        st.metric("🏢 Company Tests", "25+")
 
-st.markdown("""
-<div class="arena-banner">
-    <h1>🎯 Placement Arena</h1>
-    <h3>Practice • Compete • Improve</h3>
-    <p>
-    A dedicated aptitude preparation platform for placement success.
-    </p>
-</div>
-""", unsafe_allow_html=True)
+    st.divider()
 
-st.link_button(
-    "🚀 Launch Placement Arena",
-    "https://aptitudearena-ewoyttpiyj5kqjpgap7dd7.streamlit.app/",
-    use_container_width=True,
-    type="primary"
-)
+    st.subheader("About")
 
-st.divider()
+    st.write("""
+    Placement Arena is a dedicated aptitude preparation platform
+    designed to help students improve problem-solving speed,
+    accuracy, and confidence for placement assessments.
+    """)
 
-c1, c2, c3 = st.columns(3)
+    st.divider()
 
-with c1:
-    st.metric("📚 Topics", "49")
+    st.subheader("Available Modules")
 
-with c2:
-    st.metric("❓ Questions", "2747")
+    col1, col2 = st.columns(2)
 
-with c3:
-    st.metric("🏢 Company Tests", "25+")
+    with col1:
 
-st.divider()
+        with st.container(border=True):
+            st.subheader("📚 Practice Mode")
+            st.write("Topic-wise aptitude practice with explanations.")
 
-st.subheader("Why Placement Arena?")
+        with st.container(border=True):
+            st.subheader("📝 Mock Tests")
+            st.write("Simulated placement assessments.")
 
-st.info(
-    "Build speed, accuracy, confidence, and placement readiness through structured aptitude preparation."
-)
+    with col2:
 
-col1, col2 = st.columns(2)
+        with st.container(border=True):
+            st.subheader("🏢 Company Tests")
+            st.write("Company-specific aptitude preparation.")
 
-with col1:
+        with st.container(border=True):
+            st.subheader("📊 Analytics")
+            st.write("Track performance and improvement.")
 
-    st.markdown("""
-    <div class="arena-card">
-        <div class="feature-title">📚 Practice Mode</div>
-        <div class="feature-desc">
-            Topic-wise preparation with detailed solutions.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.divider()
 
-    st.markdown("""
-    <div class="arena-card">
-        <div class="feature-title">📝 Mock Tests</div>
-        <div class="feature-desc">
-            Real placement-style assessments with scoring.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.subheader("Preparation Roadmap")
 
-with col2:
+    roadmap = [
+        "📚 Learn Concepts",
+        "🎯 Practice Questions",
+        "📝 Mock Tests",
+        "🏢 Company Assessments",
+        "💼 Placement Success"
+    ]
 
-    st.markdown("""
-    <div class="arena-card">
-        <div class="feature-title">🏢 Company Tests</div>
-        <div class="feature-desc">
-            Practice tests inspired by major recruiters.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    for step in roadmap:
+        st.write(step)
+        if step != roadmap[-1]:
+            st.write("⬇️")
 
-    st.markdown("""
-    <div class="arena-card">
-        <div class="feature-title">📊 Analytics</div>
-        <div class="feature-desc">
-            Track progress, accuracy, and performance trends.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.divider()
 
-st.divider()
+    st.success(
+        "Regular practice improves speed, accuracy, and placement readiness."
+    )
 
-st.markdown("""
-### 🚀 Placement Journey
-
-📚 Learn Concepts
-
-⬇️
-
-🎯 Practice Questions
-
-⬇️
-
-📝 Mock Tests
-
-⬇️
-
-🏢 Company Assessments
-
-⬇️
-
-💼 Placement Success
-""")
-
-st.success(
-    "Consistent practice is the fastest way to improve aptitude performance."
-)
-```
-
+    if st.button("🎉 Show Motivation"):
+        st.balloons()
+        st.success(
+            "Every solved question is one step closer to your placement offer."
+        )
 
 def show_settings():
     section("⚙️ Settings")
