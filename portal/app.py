@@ -1245,7 +1245,7 @@ def show_placement_arena():
         "🚀 START PRACTICING NOW",
         "https://aptitudearena-ewoyttpiyj5kqjpgap7dd7.streamlit.app/",
         use_container_width=True,
-        type="primary"
+        type="secondary"
     )
 
     st.warning(
