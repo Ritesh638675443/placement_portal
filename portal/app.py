@@ -3,6 +3,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
 from openai import OpenAI
+from cgpa import show_cgpa
 import os
 import base64
 
@@ -428,6 +429,7 @@ def sidebar():
             ("📢", "Updates", "updates"),      # ← moved to 2nd position
             ("🌐", "Community", "community"),
             ("🎯", "Placement Arena", "arena"),
+            ("🎓", "CGPA Calculator", "cgpa"),
             ("🏢", "Companies", "companies"),
             ("🗂️", "Domains", "domains"),
             ("📊", "Insights", "insights"),
@@ -1424,6 +1426,8 @@ def main():
         show_settings()
     elif page == "arena":
         show_placement_arena()
+    elif page == "cgpa":
+        show_cgpa()
 
 
 if __name__ == "__main__":
