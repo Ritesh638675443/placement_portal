@@ -52,6 +52,7 @@ def show_cgpa():
             ("Fluid Mechanics and Machinery", 4),
             ("Work System Design", 4),
             ("Industrial Standards for Industrial Engineering", 1),
+            ("Universal Human Values", 2),
             ("Probability and Statistics", 4),
             ("Manufacturing Processes", 4),
         ]
@@ -154,14 +155,16 @@ def show_cgpa():
 
     st.info(
         """
-**Notes**
-
-- Only subjects included in the CGPA are considered.
-- UHV (Yoga for Human Excellence / Universal Human Values), NCC/NSS/NSO/YRC, and Audit Courses are **excluded** from CGPA calculation.
-- Total Credits Considered:
-  - Semester I : **24**
-  - Semester II : **21**
-  - Semester III : **21**
-  - **Overall Credits : 66**
-"""
+    **Notes**
+    
+    - Only NCC/NSS/NSO/YRC and Audit Courses are excluded from the CGPA calculation.
+    - Universal Human Values (UHV) is included in the CGPA calculation.
+    
+    **Total Credits Considered**
+    
+    - Semester I : **24**
+    - Semester II : **21**
+    - Semester III : **23**
+    - **Overall Credits : 68**
+    """
     )
