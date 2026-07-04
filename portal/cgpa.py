@@ -52,9 +52,9 @@ def show_cgpa():
             ("Fluid Mechanics and Machinery", 4),
             ("Work System Design", 4),
             ("Industrial Standards for Industrial Engineering", 1),
-            ("Universal Human Values", 2),
             ("Probability and Statistics", 4),
             ("Manufacturing Processes", 4),
+            ("Universal Human Values", 2),
         ]
     }
 
