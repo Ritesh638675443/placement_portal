@@ -27,6 +27,9 @@ def show_cgpa():
     # -----------------------------------
     semesters = {
 
+        # -----------------------------------
+        # Semester I
+        # -----------------------------------
         "Semester I": [
             ("Computer Programming in Python", 4),
             ("Engineering Chemistry", 4),
@@ -37,6 +40,9 @@ def show_cgpa():
             ("Heritage of Tamils", 1),
         ],
 
+        # -----------------------------------
+        # Semester II
+        # -----------------------------------
         "Semester II": [
             ("Basics of Electrical and Electronics Engineering", 3),
             ("Professional Communication", 3),
@@ -47,6 +53,9 @@ def show_cgpa():
             ("Tamils and Technology", 1),
         ],
 
+        # -----------------------------------
+        # Semester III
+        # -----------------------------------
         "Semester III": [
             ("Mechanics of Materials", 4),
             ("Fluid Mechanics and Machinery", 4),
@@ -54,9 +63,25 @@ def show_cgpa():
             ("Industrial Standards for Industrial Engineering", 1),
             ("Probability and Statistics", 4),
             ("Manufacturing Processes", 4),
+        ],
+
+        # -----------------------------------
+        # Semester IV
+        # -----------------------------------
+        "Semester IV": [
+            ("Mechanics of Machines", 3),
+            ("Thermodynamics", 3),
+            ("Applied Ergonomics", 4),
+            ("Operations Research", 4),
+            ("Manufacturing Automation", 4),
+            ("Design Thinking", 3),
+            ("Skill Development Course - II", 2),
         ]
     }
 
+    # -----------------------------------
+    # Overall Calculation Variables
+    # -----------------------------------
     overall_credit_points = 0
     overall_credits = 0
 
@@ -93,6 +118,9 @@ def show_cgpa():
                 "Credit Points": credit_points
             })
 
+        # -----------------------------------
+        # Semester Result Table
+        # -----------------------------------
         df = pd.DataFrame(records)
 
         st.dataframe(
@@ -101,27 +129,50 @@ def show_cgpa():
             hide_index=True
         )
 
-        sgpa = semester_credit_points / semester_credits
+        # -----------------------------------
+        # SGPA Calculation
+        # -----------------------------------
+        if semester_credits > 0:
+            sgpa = semester_credit_points / semester_credits
+        else:
+            sgpa = 0
 
-        st.success(f"📘 {semester} GPA : **{sgpa:.2f}**")
+        st.success(
+            f"📘 {semester} GPA : **{sgpa:.2f}**"
+        )
 
+        # Add semester values to overall calculation
         overall_credit_points += semester_credit_points
         overall_credits += semester_credits
 
         st.divider()
 
     # -----------------------------------
-    # Overall CGPA
+    # Overall CGPA Calculation
     # -----------------------------------
-    cgpa = overall_credit_points / overall_credits
+    if overall_credits > 0:
+        cgpa = overall_credit_points / overall_credits
+    else:
+        cgpa = 0
 
     st.header("🎯 Overall CGPA")
 
     col1, col2, col3 = st.columns(3)
 
-    col1.metric("Total Credits", overall_credits)
-    col2.metric("Total Credit Points", overall_credit_points)
-    col3.metric("CGPA", f"{cgpa:.2f}")
+    col1.metric(
+        "Total Credits",
+        overall_credits
+    )
+
+    col2.metric(
+        "Total Credit Points",
+        overall_credit_points
+    )
+
+    col3.metric(
+        "CGPA",
+        f"{cgpa:.2f}"
+    )
 
     st.markdown("---")
 
@@ -132,7 +183,15 @@ def show_cgpa():
 
     grade_df = pd.DataFrame({
         "Letter Grade": [
-            "S", "A+", "A", "B+", "B", "C", "RA/U", "SA", "-"
+            "S",
+            "A+",
+            "A",
+            "B+",
+            "B",
+            "C",
+            "RA/U",
+            "SA",
+            "-"
         ],
         "Meaning": [
             "Outstanding",
@@ -146,22 +205,37 @@ def show_cgpa():
             "Withheld"
         ],
         "Grade Point": [
-            10, 9, 8, 7, 6, 5, 0, 0, 0
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            0,
+            0,
+            0
         ]
     })
 
     st.table(grade_df)
 
+    # -----------------------------------
+    # Notes
+    # -----------------------------------
     st.info(
-    """
-    **Notes**
-    
-    - Only subjects included in the CGPA are considered.
-    - UHV (Yoga for Human Excellence / Universal Human Values), NCC/NSS/NSO/YRC, and Audit Courses are **excluded** from CGPA calculation.
-    - Total Credits Considered:
-      - Semester I : **24**
-      - Semester II : **21**
-      - Semester III : **21**
-      - **Overall Credits : 66**
-    """
+        """
+        **Notes**
+
+        - Only subjects included in the CGPA are considered.
+        - UHV (Yoga for Human Excellence / Universal Human Values),
+          NCC/NSS/NSO/YRC, and Audit Courses are **excluded from CGPA calculation**.
+
+        **Total Credits Considered:**
+
+        - Semester I : **24**
+        - Semester II : **21**
+        - Semester III : **21**
+        - Semester IV : **23**
+        - **Overall Credits : 89**
+        """
     )
