@@ -27,9 +27,9 @@ def show_cgpa():
     # -----------------------------------
     semesters = {
 
-        # -----------------------------------
-        # Semester I
-        # -----------------------------------
+        # ===================================
+        # SEMESTER I
+        # ===================================
         "Semester I": [
             ("Computer Programming in Python", 4),
             ("Engineering Chemistry", 4),
@@ -40,9 +40,9 @@ def show_cgpa():
             ("Heritage of Tamils", 1),
         ],
 
-        # -----------------------------------
-        # Semester II
-        # -----------------------------------
+        # ===================================
+        # SEMESTER II
+        # ===================================
         "Semester II": [
             ("Basics of Electrical and Electronics Engineering", 3),
             ("Professional Communication", 3),
@@ -53,9 +53,9 @@ def show_cgpa():
             ("Tamils and Technology", 1),
         ],
 
-        # -----------------------------------
-        # Semester III
-        # -----------------------------------
+        # ===================================
+        # SEMESTER III
+        # ===================================
         "Semester III": [
             ("Mechanics of Materials", 4),
             ("Fluid Mechanics and Machinery", 4),
@@ -65,17 +65,17 @@ def show_cgpa():
             ("Manufacturing Processes", 4),
         ],
 
-        # -----------------------------------
-        # Semester IV
-        # -----------------------------------
+        # ===================================
+        # SEMESTER IV
+        # ===================================
         "Semester IV": [
-            ("Mechanics of Machines", 3),
-            ("Thermodynamics", 3),
             ("Applied Ergonomics", 4),
-            ("Operations Research", 4),
             ("Manufacturing Automation", 4),
+            ("Mechanics of Machines", 3),
+            ("Operations Research", 4),
+            ("Data Visualization Techniques", 2),
             ("Design Thinking", 3),
-            ("Skill Development Course - II", 2),
+            ("Thermodynamics and Heat Transfer", 3),
         ]
     }
 
