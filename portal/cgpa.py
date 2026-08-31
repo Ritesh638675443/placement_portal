@@ -7,9 +7,108 @@ def show_cgpa():
     st.title("🎓 INDUSTRIAL ENGINEERING CGPA Calculator")
     st.write("Anna University (R2023 Regulation)")
 
-    # -----------------------------------
-    # Grade Mapping
-    # -----------------------------------
+    # =========================================================
+    # QUICK CGPA CALCULATOR
+    # =========================================================
+
+    st.header("🧮 Overall CGPA Calculator")
+
+    st.write(
+        "Enter your CGPA up to Semester III and your Semester IV GPA "
+        "to calculate your overall CGPA."
+    )
+
+    # Credit structure
+    sem1_credits = 24
+    sem2_credits = 21
+    sem3_credits = 21
+    sem4_credits = 23
+
+    credits_till_3rd = sem1_credits + sem2_credits + sem3_credits
+    total_credits = credits_till_3rd + sem4_credits
+
+    st.info(
+        f"""
+        **Credit Structure**
+
+        📘 Credits till Semester III: **{credits_till_3rd}**
+
+        📗 Semester IV Credits: **{sem4_credits}**
+
+        🎯 Total Credits after Semester IV: **{total_credits}**
+        """
+    )
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        previous_cgpa = st.number_input(
+            "📊 CGPA Till 3rd Semester",
+            min_value=0.00,
+            max_value=10.00,
+            value=0.00,
+            step=0.01,
+            format="%.2f",
+            key="quick_previous_cgpa"
+        )
+
+    with col2:
+        fourth_sem_gpa = st.number_input(
+            "📘 4th Semester GPA",
+            min_value=0.00,
+            max_value=10.00,
+            value=0.00,
+            step=0.01,
+            format="%.2f",
+            key="quick_fourth_gpa"
+        )
+
+    if st.button("🎯 Calculate Overall CGPA", type="primary"):
+
+        # Credit-weighted calculation
+        previous_credit_points = previous_cgpa * credits_till_3rd
+        fourth_sem_credit_points = fourth_sem_gpa * sem4_credits
+
+        overall_cgpa = (
+            previous_credit_points + fourth_sem_credit_points
+        ) / total_credits
+
+        st.success(
+            f"🎓 Overall CGPA after 4th Semester: **{overall_cgpa:.2f}**"
+        )
+
+        # Calculation details
+        st.subheader("📐 Calculation")
+
+        st.write(
+            f"""
+            **Previous CGPA:** {previous_cgpa:.2f}
+
+            **Previous Credits:** {credits_till_3rd}
+
+            **4th Semester GPA:** {fourth_sem_gpa:.2f}
+
+            **4th Semester Credits:** {sem4_credits}
+            """
+        )
+
+        st.latex(
+            rf"""
+            CGPA =
+            \frac{{({previous_cgpa:.2f}\times{credits_till_3rd})
+            +({fourth_sem_gpa:.2f}\times{sem4_credits})}}
+            {{{total_credits}}}
+            =
+            {overall_cgpa:.2f}
+            """
+        )
+
+    st.markdown("---")
+
+    # =========================================================
+    # GRADE MAPPING
+    # =========================================================
+
     grade_points = {
         "S": 10,
         "A+": 9,
@@ -22,9 +121,10 @@ def show_cgpa():
         "-": 0
     }
 
-    # -----------------------------------
-    # Semester-wise Subjects
-    # -----------------------------------
+    # =========================================================
+    # SEMESTER-WISE SUBJECTS
+    # =========================================================
+
     semesters = {
 
         # ===================================
@@ -79,15 +179,17 @@ def show_cgpa():
         ]
     }
 
-    # -----------------------------------
-    # Overall Calculation Variables
-    # -----------------------------------
+    # =========================================================
+    # OVERALL CALCULATION VARIABLES
+    # =========================================================
+
     overall_credit_points = 0
     overall_credits = 0
 
-    # -----------------------------------
-    # Semester Calculations
-    # -----------------------------------
+    # =========================================================
+    # SEMESTER CALCULATIONS
+    # =========================================================
+
     for semester, subjects in semesters.items():
 
         st.header(semester)
@@ -105,6 +207,7 @@ def show_cgpa():
             )
 
             gp = grade_points[grade]
+
             credit_points = gp * credit
 
             semester_credit_points += credit_points
@@ -121,6 +224,7 @@ def show_cgpa():
         # -----------------------------------
         # Semester Result Table
         # -----------------------------------
+
         df = pd.DataFrame(records)
 
         st.dataframe(
@@ -132,6 +236,7 @@ def show_cgpa():
         # -----------------------------------
         # SGPA Calculation
         # -----------------------------------
+
         if semester_credits > 0:
             sgpa = semester_credit_points / semester_credits
         else:
@@ -142,14 +247,16 @@ def show_cgpa():
         )
 
         # Add semester values to overall calculation
+
         overall_credit_points += semester_credit_points
         overall_credits += semester_credits
 
         st.divider()
 
-    # -----------------------------------
-    # Overall CGPA Calculation
-    # -----------------------------------
+    # =========================================================
+    # OVERALL CGPA
+    # =========================================================
+
     if overall_credits > 0:
         cgpa = overall_credit_points / overall_credits
     else:
@@ -177,131 +284,9 @@ def show_cgpa():
     st.markdown("---")
 
     # =========================================================
-    # QUICK CGPA CALCULATOR
+    # GRADE SCALE
     # =========================================================
 
-    st.header("🧮 Calculate Overall CGPA from Previous CGPA + 4th Sem GPA")
-
-    st.write(
-        "If you already know your CGPA up to Semester III "
-        "and your Semester IV GPA, you can calculate your "
-        "overall CGPA directly."
-    )
-
-    # Credits based on the curriculum
-    previous_credits = 24 + 21 + 21   # Sem I + II + III
-    fourth_sem_credits = 23
-    total_credits = previous_credits + fourth_sem_credits
-
-    st.info(
-        f"""
-        **Credit Structure**
-
-        - Credits up to Semester III: **{previous_credits}**
-        - Semester IV Credits: **{fourth_sem_credits}**
-        - Total Credits after Semester IV: **{total_credits}**
-        """
-    )
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        previous_cgpa = st.number_input(
-            "Enter CGPA up to Semester III",
-            min_value=0.00,
-            max_value=10.00,
-            value=0.00,
-            step=0.01,
-            format="%.2f",
-            key="previous_cgpa"
-        )
-
-    with col2:
-        fourth_sem_gpa = st.number_input(
-            "Enter Semester IV GPA",
-            min_value=0.00,
-            max_value=10.00,
-            value=0.00,
-            step=0.01,
-            format="%.2f",
-            key="fourth_sem_gpa"
-        )
-
-    # -----------------------------------
-    # Calculate Overall CGPA
-    # -----------------------------------
-    if st.button("Calculate Overall CGPA", type="primary"):
-
-        previous_credit_points = previous_cgpa * previous_credits
-        fourth_sem_credit_points = fourth_sem_gpa * fourth_sem_credits
-
-        new_cgpa = (
-            previous_credit_points + fourth_sem_credit_points
-        ) / total_credits
-
-        st.success(
-            f"🎯 Your Overall CGPA after Semester IV is: **{new_cgpa:.2f}**"
-        )
-
-        # -----------------------------------
-        # Calculation Breakdown
-        # -----------------------------------
-        st.subheader("📊 Calculation Breakdown")
-
-        breakdown_df = pd.DataFrame({
-            "Component": [
-                "CGPA up to Semester III",
-                "Semester IV GPA",
-                "Credits up to Semester III",
-                "Semester IV Credits",
-                "Total Credits",
-                "Overall CGPA"
-            ],
-            "Value": [
-                f"{previous_cgpa:.2f}",
-                f"{fourth_sem_gpa:.2f}",
-                previous_credits,
-                fourth_sem_credits,
-                total_credits,
-                f"{new_cgpa:.2f}"
-            ]
-        })
-
-        st.dataframe(
-            breakdown_df,
-            use_container_width=True,
-            hide_index=True
-        )
-
-        # -----------------------------------
-        # Formula Display
-        # -----------------------------------
-        st.markdown("### 📐 Formula Used")
-
-        st.latex(
-            r"""
-            CGPA_{new}
-            =
-            \frac{
-            (CGPA_{old}\times Credits_{old})
-            +
-            (GPA_4\times Credits_4)
-            }{
-            Credits_{old}+Credits_4
-            }
-            """
-        )
-
-        st.caption(
-            "The calculation is credit-weighted; the CGPA and Semester IV GPA "
-            "are NOT simply averaged."
-        )
-
-    st.markdown("---")
-
-    # -----------------------------------
-    # Grade Scale
-    # -----------------------------------
     st.subheader("📖 Anna University Grade Scale")
 
     grade_df = pd.DataFrame({
@@ -342,9 +327,10 @@ def show_cgpa():
 
     st.table(grade_df)
 
-    # -----------------------------------
-    # Notes
-    # -----------------------------------
+    # =========================================================
+    # NOTES
+    # =========================================================
+
     st.info(
         """
         **Notes**
