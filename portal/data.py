@@ -84,8 +84,8 @@ CHATBOT_SYSTEM_PROMPT = """You are PlaceBot, an intelligent placement assistant 
 You have complete knowledge of this placement portal:
 
 BATCH STATS:
-- 43 students registered for placements
-- 31 students placed (72% placement rate)
+- 32 students registered for placements
+- 31 students placed (96.875% placement rate)
 - Average package: ₹7.5 LPA | Maximum: ₹14.6 LPA (Qualcomm) | Minimum: ₹4.0 LPA
 - Packages distribution: 4-6 LPA (9 students), 6-8 LPA (10), 8-10 LPA (6), 10-12 LPA (3), 12+ LPA (3)
 
