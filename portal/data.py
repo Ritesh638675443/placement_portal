@@ -47,9 +47,9 @@ COMPANIES = [
 ]
 
 STATS = {
-    "registered": 43,
+    "registered": 32,
     "placed": 31,
-    "placement_rate": 72,
+    "placement_rate": 96.875,
     "avg_package_lpa": 7.5,
     "max_package_lpa": 14.6,
     "min_package_lpa": 4.0,
