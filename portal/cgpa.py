@@ -84,8 +84,6 @@ def show_cgpa():
         type="primary"
     ):
 
-        # Credit-weighted calculation
-
         previous_credit_points = (
             previous_cgpa * credits_till_3rd
         )
@@ -159,104 +157,70 @@ def show_cgpa():
 
     semesters = {
 
-        # ===================================
+        # =====================================================
         # SEMESTER I
-        # ===================================
+        # =====================================================
 
         "Semester I": [
-
             ("Computer Programming in Python", 4),
-
             ("Engineering Chemistry", 4),
-
             ("Foundation English", 3),
-
             ("Matrices and Calculus", 4),
-
             ("Engineering Drawing and 3D Modelling", 4),
-
             ("Engineering Physics", 4),
-
             ("Heritage of Tamils", 1),
         ],
 
-        # ===================================
+        # =====================================================
         # SEMESTER II
-        # ===================================
+        # =====================================================
 
         "Semester II": [
-
             (
                 "Basics of Electrical and Electronics Engineering",
                 3
             ),
-
             ("Professional Communication", 3),
-
             (
                 "Ordinary Differential Equations and "
                 "Transform Techniques",
                 4
             ),
-
             ("Engineering Mechanics", 4),
-
             ("Makerspace", 3),
-
             ("Material Science", 3),
-
             ("Tamils and Technology", 1),
         ],
 
-        # ===================================
+        # =====================================================
         # SEMESTER III
-        # ===================================
+        # =====================================================
 
         "Semester III": [
-
             ("Mechanics of Materials", 4),
-
             ("Fluid Mechanics and Machinery", 4),
-
             ("Work System Design", 4),
-
             (
                 "Industrial Standards for Industrial Engineering",
                 1
             ),
-
             ("Probability and Statistics", 4),
-
             ("Manufacturing Processes", 4),
         ],
 
-        # ===================================
+        # =====================================================
         # SEMESTER IV
-        # CORRECTED CURRICULUM
-        # ===================================
+        # EXACT ORDER FROM YOUR SCREENSHOT
+        # =====================================================
 
         "Semester IV": [
-
-            # IE23403
-            ("Mechanics of Machines", 4),
-
-            # ME23C14
-            ("Thermodynamics and Heat Transfer", 3),
-
-            # IE23401
             ("Applied Ergonomics", 4),
-
-            # IE23404
-            ("Operations Research", 4),
-
-            # IE23402
             ("Manufacturing Automation", 3),
-
-            # ME23C06
+            ("Mechanics of Machines", 4),
+            ("Operations Research", 4),
+            ("Data Visualization Techniques", 2),
             ("Design Thinking", 3),
-
-            # Skill Development Course - I
-            ("Skill Development Course - I", 2),
+            ("Thermodynamics and Heat Transfer", 3),
         ]
     }
 
@@ -281,7 +245,7 @@ def show_cgpa():
         records = []
 
         # =====================================================
-        # SUBJECTS
+        # SUBJECT-WISE GRADE INPUT
         # =====================================================
 
         for subject, credit in subjects:
@@ -297,7 +261,6 @@ def show_cgpa():
             credit_points = gp * credit
 
             semester_credit_points += credit_points
-
             semester_credits += credit
 
             records.append(
@@ -342,11 +305,10 @@ def show_cgpa():
         )
 
         # =====================================================
-        # ADD TO OVERALL CALCULATION
+        # ADD SEMESTER VALUES TO OVERALL CALCULATION
         # =====================================================
 
         overall_credit_points += semester_credit_points
-
         overall_credits += semester_credits
 
         st.divider()
@@ -444,21 +406,22 @@ def show_cgpa():
         **Notes**
 
         - Only subjects included in the CGPA are considered.
-        - Audit Course II is excluded from CGPA calculation.
+        - Audit courses are excluded from CGPA calculation.
         - UHV (Yoga for Human Excellence / Universal Human Values),
           NCC/NSS/NSO/YRC, and Audit Courses are excluded from
           CGPA calculation.
 
         **Semester IV Courses:**
 
-        - Mechanics of Machines : **4 Credits**
-        - Thermodynamics and Heat Transfer : **3 Credits**
-        - Applied Ergonomics : **4 Credits**
-        - Operations Research : **4 Credits**
-        - Manufacturing Automation : **3 Credits**
-        - Design Thinking : **3 Credits**
-        - Skill Development Course - I : **2 Credits**
-        - Audit Course II : **0 Credits (Excluded)**
+        1. Applied Ergonomics : **4 Credits**
+        2. Manufacturing Automation : **3 Credits**
+        3. Mechanics of Machines : **4 Credits**
+        4. Operations Research : **4 Credits**
+        5. Data Visualization Techniques : **2 Credits**
+        6. Design Thinking : **3 Credits**
+        7. Thermodynamics and Heat Transfer : **3 Credits**
+
+        **Semester IV Total: 23 Credits**
 
         **Total Credits Considered:**
 
