@@ -18,13 +18,21 @@ def show_cgpa():
         "to calculate your overall CGPA."
     )
 
-    # Credit structure
+    # =========================================================
+    # CREDIT STRUCTURE
+    # =========================================================
+
     sem1_credits = 24
     sem2_credits = 21
     sem3_credits = 21
     sem4_credits = 23
 
-    credits_till_3rd = sem1_credits + sem2_credits + sem3_credits
+    credits_till_3rd = (
+        sem1_credits
+        + sem2_credits
+        + sem3_credits
+    )
+
     total_credits = credits_till_3rd + sem4_credits
 
     st.info(
@@ -38,6 +46,10 @@ def show_cgpa():
         🎯 Total Credits after Semester IV: **{total_credits}**
         """
     )
+
+    # =========================================================
+    # INPUTS
+    # =========================================================
 
     col1, col2 = st.columns(2)
 
@@ -63,21 +75,39 @@ def show_cgpa():
             key="quick_fourth_gpa"
         )
 
-    if st.button("🎯 Calculate Overall CGPA", type="primary"):
+    # =========================================================
+    # CALCULATE OVERALL CGPA
+    # =========================================================
+
+    if st.button(
+        "🎯 Calculate Overall CGPA",
+        type="primary"
+    ):
 
         # Credit-weighted calculation
-        previous_credit_points = previous_cgpa * credits_till_3rd
-        fourth_sem_credit_points = fourth_sem_gpa * sem4_credits
+
+        previous_credit_points = (
+            previous_cgpa * credits_till_3rd
+        )
+
+        fourth_sem_credit_points = (
+            fourth_sem_gpa * sem4_credits
+        )
 
         overall_cgpa = (
-            previous_credit_points + fourth_sem_credit_points
+            previous_credit_points
+            + fourth_sem_credit_points
         ) / total_credits
 
         st.success(
-            f"🎓 Overall CGPA after 4th Semester: **{overall_cgpa:.2f}**"
+            f"🎓 Overall CGPA after 4th Semester: "
+            f"**{overall_cgpa:.2f}**"
         )
 
-        # Calculation details
+        # =====================================================
+        # CALCULATION DETAILS
+        # =====================================================
+
         st.subheader("📐 Calculation")
 
         st.write(
@@ -89,6 +119,8 @@ def show_cgpa():
             **4th Semester GPA:** {fourth_sem_gpa:.2f}
 
             **4th Semester Credits:** {sem4_credits}
+
+            **Total Credits:** {total_credits}
             """
         )
 
@@ -130,52 +162,101 @@ def show_cgpa():
         # ===================================
         # SEMESTER I
         # ===================================
+
         "Semester I": [
+
             ("Computer Programming in Python", 4),
+
             ("Engineering Chemistry", 4),
+
             ("Foundation English", 3),
+
             ("Matrices and Calculus", 4),
+
             ("Engineering Drawing and 3D Modelling", 4),
+
             ("Engineering Physics", 4),
+
             ("Heritage of Tamils", 1),
         ],
 
         # ===================================
         # SEMESTER II
         # ===================================
+
         "Semester II": [
-            ("Basics of Electrical and Electronics Engineering", 3),
+
+            (
+                "Basics of Electrical and Electronics Engineering",
+                3
+            ),
+
             ("Professional Communication", 3),
-            ("Ordinary Differential Equations and Transform Techniques", 4),
+
+            (
+                "Ordinary Differential Equations and "
+                "Transform Techniques",
+                4
+            ),
+
             ("Engineering Mechanics", 4),
+
             ("Makerspace", 3),
+
             ("Material Science", 3),
+
             ("Tamils and Technology", 1),
         ],
 
         # ===================================
         # SEMESTER III
         # ===================================
+
         "Semester III": [
+
             ("Mechanics of Materials", 4),
+
             ("Fluid Mechanics and Machinery", 4),
+
             ("Work System Design", 4),
-            ("Industrial Standards for Industrial Engineering", 1),
+
+            (
+                "Industrial Standards for Industrial Engineering",
+                1
+            ),
+
             ("Probability and Statistics", 4),
+
             ("Manufacturing Processes", 4),
         ],
 
         # ===================================
         # SEMESTER IV
+        # CORRECTED CURRICULUM
         # ===================================
+
         "Semester IV": [
-            ("Applied Ergonomics", 4),
-            ("Manufacturing Automation", 3),
+
+            # IE23403
             ("Mechanics of Machines", 4),
-            ("Operations Research", 4),
-            ("Data Visualization Techniques", 2),
-            ("Design Thinking", 3),
+
+            # ME23C14
             ("Thermodynamics and Heat Transfer", 3),
+
+            # IE23401
+            ("Applied Ergonomics", 4),
+
+            # IE23404
+            ("Operations Research", 4),
+
+            # IE23402
+            ("Manufacturing Automation", 3),
+
+            # ME23C06
+            ("Design Thinking", 3),
+
+            # Skill Development Course - I
+            ("Skill Development Course - I", 2),
         ]
     }
 
@@ -196,7 +277,12 @@ def show_cgpa():
 
         semester_credit_points = 0
         semester_credits = 0
+
         records = []
+
+        # =====================================================
+        # SUBJECTS
+        # =====================================================
 
         for subject, credit in subjects:
 
@@ -211,19 +297,22 @@ def show_cgpa():
             credit_points = gp * credit
 
             semester_credit_points += credit_points
+
             semester_credits += credit
 
-            records.append({
-                "Subject": subject,
-                "Credits": credit,
-                "Grade": grade,
-                "Grade Point": gp,
-                "Credit Points": credit_points
-            })
+            records.append(
+                {
+                    "Subject": subject,
+                    "Credits": credit,
+                    "Grade": grade,
+                    "Grade Point": gp,
+                    "Credit Points": credit_points
+                }
+            )
 
-        # -----------------------------------
-        # Semester Result Table
-        # -----------------------------------
+        # =====================================================
+        # SEMESTER RESULT TABLE
+        # =====================================================
 
         df = pd.DataFrame(records)
 
@@ -233,22 +322,31 @@ def show_cgpa():
             hide_index=True
         )
 
-        # -----------------------------------
-        # SGPA Calculation
-        # -----------------------------------
+        # =====================================================
+        # SGPA CALCULATION
+        # =====================================================
 
         if semester_credits > 0:
-            sgpa = semester_credit_points / semester_credits
+
+            sgpa = (
+                semester_credit_points
+                / semester_credits
+            )
+
         else:
+
             sgpa = 0
 
         st.success(
             f"📘 {semester} GPA : **{sgpa:.2f}**"
         )
 
-        # Add semester values to overall calculation
+        # =====================================================
+        # ADD TO OVERALL CALCULATION
+        # =====================================================
 
         overall_credit_points += semester_credit_points
+
         overall_credits += semester_credits
 
         st.divider()
@@ -258,8 +356,14 @@ def show_cgpa():
     # =========================================================
 
     if overall_credits > 0:
-        cgpa = overall_credit_points / overall_credits
+
+        cgpa = (
+            overall_credit_points
+            / overall_credits
+        )
+
     else:
+
         cgpa = 0
 
     st.header("🎯 Overall CGPA")
@@ -289,41 +393,45 @@ def show_cgpa():
 
     st.subheader("📖 Anna University Grade Scale")
 
-    grade_df = pd.DataFrame({
-        "Letter Grade": [
-            "S",
-            "A+",
-            "A",
-            "B+",
-            "B",
-            "C",
-            "RA/U",
-            "SA",
-            "-"
-        ],
-        "Meaning": [
-            "Outstanding",
-            "Excellent",
-            "Very Good",
-            "Good",
-            "Average",
-            "Satisfactory",
-            "Reappear",
-            "Shortage of Attendance",
-            "Withheld"
-        ],
-        "Grade Point": [
-            10,
-            9,
-            8,
-            7,
-            6,
-            5,
-            0,
-            0,
-            0
-        ]
-    })
+    grade_df = pd.DataFrame(
+        {
+            "Letter Grade": [
+                "S",
+                "A+",
+                "A",
+                "B+",
+                "B",
+                "C",
+                "RA/U",
+                "SA",
+                "-"
+            ],
+
+            "Meaning": [
+                "Outstanding",
+                "Excellent",
+                "Very Good",
+                "Good",
+                "Average",
+                "Satisfactory",
+                "Reappear",
+                "Shortage of Attendance",
+                "Withheld"
+            ],
+
+            "Grade Point": [
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                0,
+                0,
+                0
+            ]
+        }
+    )
 
     st.table(grade_df)
 
@@ -336,8 +444,21 @@ def show_cgpa():
         **Notes**
 
         - Only subjects included in the CGPA are considered.
+        - Audit Course II is excluded from CGPA calculation.
         - UHV (Yoga for Human Excellence / Universal Human Values),
-          NCC/NSS/NSO/YRC, and Audit Courses are **excluded from CGPA calculation**.
+          NCC/NSS/NSO/YRC, and Audit Courses are excluded from
+          CGPA calculation.
+
+        **Semester IV Courses:**
+
+        - Mechanics of Machines : **4 Credits**
+        - Thermodynamics and Heat Transfer : **3 Credits**
+        - Applied Ergonomics : **4 Credits**
+        - Operations Research : **4 Credits**
+        - Manufacturing Automation : **3 Credits**
+        - Design Thinking : **3 Credits**
+        - Skill Development Course - I : **2 Credits**
+        - Audit Course II : **0 Credits (Excluded)**
 
         **Total Credits Considered:**
 
