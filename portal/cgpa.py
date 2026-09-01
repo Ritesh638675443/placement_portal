@@ -170,8 +170,8 @@ def show_cgpa():
         # ===================================
         "Semester IV": [
             ("Applied Ergonomics", 4),
-            ("Manufacturing Automation", 4),
-            ("Mechanics of Machines", 3),
+            ("Manufacturing Automation", 3),
+            ("Mechanics of Machines", 4),
             ("Operations Research", 4),
             ("Data Visualization Techniques", 2),
             ("Design Thinking", 3),
