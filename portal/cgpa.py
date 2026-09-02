@@ -43,7 +43,7 @@ def show_cgpa():
 
         📗 Semester IV Credits: **{sem4_credits}**
 
-        🎯 Total Credits after Semester IV: **{total_credits}**
+        🎯 Total Curriculum Credits after Semester IV: **{total_credits}**
         """
     )
 
@@ -118,7 +118,7 @@ def show_cgpa():
 
             **4th Semester Credits:** {sem4_credits}
 
-            **Total Credits:** {total_credits}
+            **Total Curriculum Credits:** {total_credits}
             """
         )
 
@@ -149,6 +149,16 @@ def show_cgpa():
         "RA/U": 0,
         "SA": 0,
         "-": 0
+    }
+
+    # =========================================================
+    # GRADES THAT DO NOT COUNT THEIR CREDITS
+    # =========================================================
+
+    excluded_grades = {
+        "RA/U",
+        "SA",
+        "-"
     }
 
     # =========================================================
@@ -231,6 +241,12 @@ def show_cgpa():
     overall_credit_points = 0
     overall_credits = 0
 
+    # Total curriculum credits
+    total_curriculum_credits = 0
+
+    # Credits excluded because of U/RA/SA/-
+    total_excluded_credits = 0
+
     # =========================================================
     # SEMESTER CALCULATIONS
     # =========================================================
@@ -242,6 +258,12 @@ def show_cgpa():
         semester_credit_points = 0
         semester_credits = 0
 
+        # Total credits registered for this semester
+        semester_curriculum_credits = 0
+
+        # Credits excluded because of failed/invalid grades
+        semester_excluded_credits = 0
+
         records = []
 
         # =====================================================
@@ -249,6 +271,9 @@ def show_cgpa():
         # =====================================================
 
         for subject, credit in subjects:
+
+            semester_curriculum_credits += credit
+            total_curriculum_credits += credit
 
             grade = st.selectbox(
                 f"{subject} ({credit} Credits)",
@@ -258,10 +283,37 @@ def show_cgpa():
 
             gp = grade_points[grade]
 
+            # =================================================
+            # CREDIT POINTS
+            # =================================================
+
             credit_points = gp * credit
 
             semester_credit_points += credit_points
-            semester_credits += credit
+
+            # =================================================
+            # IMPORTANT:
+            # U/RA, SA AND "-" CREDITS ARE NOT INCLUDED
+            # IN THE CGPA DENOMINATOR
+            # =================================================
+
+            if grade in excluded_grades:
+
+                # Do NOT add this subject's credits
+                # to semester_credits
+
+                semester_excluded_credits += credit
+                total_excluded_credits += credit
+
+            else:
+
+                # Only passed/valid grades contribute
+                # their credits to denominator
+                semester_credits += credit
+
+            # =================================================
+            # TABLE RECORD
+            # =================================================
 
             records.append(
                 {
@@ -269,7 +321,12 @@ def show_cgpa():
                     "Credits": credit,
                     "Grade": grade,
                     "Grade Point": gp,
-                    "Credit Points": credit_points
+                    "Credit Points": credit_points,
+                    "Credits Counted": (
+                        0
+                        if grade in excluded_grades
+                        else credit
+                    )
                 }
             )
 
@@ -300,6 +357,24 @@ def show_cgpa():
 
             sgpa = 0
 
+        # =====================================================
+        # SEMESTER CREDIT INFORMATION
+        # =====================================================
+
+        st.info(
+            f"""
+            **{semester} Credit Calculation**
+
+            📚 Curriculum Credits: **{semester_curriculum_credits}**
+
+            ❌ U/RA/SA/- Credits Excluded: **{semester_excluded_credits}**
+
+            ✅ Credits Considered for GPA: **{semester_credits}**
+
+            🎯 Credit Points: **{semester_credit_points}**
+            """
+        )
+
         st.success(
             f"📘 {semester} GPA : **{sgpa:.2f}**"
         )
@@ -309,6 +384,9 @@ def show_cgpa():
         # =====================================================
 
         overall_credit_points += semester_credit_points
+
+        # IMPORTANT:
+        # Only credits belonging to valid grades are added
         overall_credits += semester_credits
 
         st.divider()
@@ -328,24 +406,93 @@ def show_cgpa():
 
         cgpa = 0
 
+    # =========================================================
+    # OVERALL CREDIT INFORMATION
+    # =========================================================
+
     st.header("🎯 Overall CGPA")
 
     col1, col2, col3 = st.columns(3)
 
     col1.metric(
-        "Total Credits",
-        overall_credits
+        "Curriculum Credits",
+        total_curriculum_credits
     )
 
     col2.metric(
+        "Credits Excluded",
+        total_excluded_credits
+    )
+
+    col3.metric(
+        "Credits Considered",
+        overall_credits
+    )
+
+    st.metric(
         "Total Credit Points",
         overall_credit_points
     )
 
-    col3.metric(
-        "CGPA",
-        f"{cgpa:.2f}"
+    st.success(
+        f"🎓 Overall CGPA: **{cgpa:.2f}**"
     )
+
+    # =========================================================
+    # OVERALL CALCULATION DETAILS
+    # =========================================================
+
+    st.subheader("📐 Overall CGPA Calculation")
+
+    st.write(
+        f"""
+        **Total Curriculum Credits:** {total_curriculum_credits}
+
+        **Credits Excluded due to U/RA/SA/-:** {total_excluded_credits}
+
+        **Credits Considered for CGPA:** {overall_credits}
+
+        **Total Credit Points:** {overall_credit_points}
+        """
+    )
+
+    st.latex(
+        rf"""
+        CGPA =
+        \frac{{\text{{Total Credit Points}}}}
+        {{\text{{Credits Considered}}}}
+        =
+        \frac{{{overall_credit_points}}}
+        {{{overall_credits}}}
+        =
+        {cgpa:.2f}
+        """
+    )
+
+    # =========================================================
+    # EXPLANATION OF U/RA CALCULATION
+    # =========================================================
+
+    if total_excluded_credits > 0:
+
+        st.warning(
+            f"""
+            ⚠️ **U/RA Credit Adjustment**
+
+            {total_excluded_credits} credit(s) are excluded from
+            the CGPA denominator because the corresponding subjects
+            have U/RA, SA, or '-' grades.
+
+            These subjects contribute **0 credit points** and their
+            credits are also **removed from the denominator**.
+
+            Therefore:
+
+            **Credits Considered = {total_curriculum_credits}
+            − {total_excluded_credits}
+            = {overall_credits}**
+            """
+        )
 
     st.markdown("---")
 
@@ -402,10 +549,15 @@ def show_cgpa():
     # =========================================================
 
     st.info(
-        """
+        f"""
         **Notes**
 
-        - Only subjects included in the CGPA are considered.
+        - Only subjects with valid passing grades are included
+          in the CGPA denominator.
+        - U/RA subjects contribute **0 credit points**.
+        - The credits of U/RA subjects are **excluded from the
+          denominator**.
+        - SA and '-' are also excluded from the denominator.
         - Audit courses are excluded from CGPA calculation.
         - UHV (Yoga for Human Excellence / Universal Human Values),
           NCC/NSS/NSO/YRC, and Audit Courses are excluded from
@@ -423,12 +575,16 @@ def show_cgpa():
 
         **Semester IV Total: 23 Credits**
 
-        **Total Credits Considered:**
+        **Normal Total Credits:**
 
         - Semester I : **24**
         - Semester II : **21**
         - Semester III : **21**
         - Semester IV : **23**
-        - **Overall Credits : 89**
+        - **Overall Curriculum Credits : 89**
+
+        **Important:**
+        If a student receives U/RA in a subject, the subject's
+        credits are deducted from the credits considered for CGPA.
         """
     )
